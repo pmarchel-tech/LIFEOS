@@ -1,0 +1,278 @@
+// Data spesifikasi 8 Elemen Mandat Takashi Harada
+// Mencakup: 8 Tindakan Spesifik per Elemen, Frekuensi Eksekusi, dan Jadwal Tanggal September 2026
+
+export const MANDALA_ELEMENT_DETAILS = {
+  E1: {
+    code: 'E1',
+    name: 'Spiritual Foundation',
+    title: 'Akar dari Semua Mandat',
+    quote: 'Tanpa akar yang dalam, pohon yang tinggi akan roboh saat badai.',
+    color: 'purple',
+    accentColor: 'text-purple-400',
+    borderColor: 'border-purple-500/40',
+    bgClass: 'bg-purple-950/30',
+    barColor: 'bg-purple-500',
+    tagBg: 'bg-purple-500/20 text-purple-300 border-purple-500/30',
+    actions: [
+      { id: '1.1', action: 'Doa pagi minimum 30 menit SEBELUM membuka HP', frequency: 'Setiap hari', type: 'Rutinitas Harian' },
+      { id: '1.2', action: 'Baca Alkitab + refleksi mandat — tulis 1 insight/hari', frequency: 'Setiap hari', type: 'Rutinitas Harian' },
+      { id: '1.3', action: 'Akuntabilitas rohani dengan gembala/mentor spiritual', frequency: 'Mingguan', type: 'Disiplin Rohani' },
+      { id: '1.4', action: 'Persepuluhan PERTAMA dari setiap revenue — 10% ke pelayanan', frequency: 'Setiap pemasukan', type: 'Ketetapan Keuangan' },
+      { id: '1.5', action: 'Sabat penuh — 1 hari istirahat & penyembahan tanpa urusan bisnis', frequency: 'Mingguan (Minggu)', type: 'Perhentian Kudus' },
+      { id: '1.6', action: 'Puasa dan doa — minimum 1x per bulan untuk terobosan mandat', frequency: 'Bulanan', type: 'Doa Puasa' },
+      { id: '1.7', action: 'Jurnal syukur — tulis 3 hal yang Tuhan kerjakan hari ini', frequency: 'Setiap malam', type: 'Rutinitas Malam' },
+      { id: '1.8', action: 'Melayani secara aktif di komunitas iman (bukan sekadar hadir)', frequency: 'Mingguan', type: 'Pelayanan Nyata' }
+    ],
+    dates: [
+      { date: '08-Sep', task: 'Dekrit Pagi + Bible App + 1 Tindakan Kebaikan + Catat di Winning App', highlight: false },
+      { date: '09-Sep', task: 'Dekrit Pagi + Bible App + 1 Tindakan Kebaikan + Catat di Winning App', highlight: false },
+      { date: '10-Sep', task: 'Dekrit Pagi + Bible App + 1 Tindakan Kebaikan + Catat di Winning App', highlight: false },
+      { date: '11-Sep', task: 'Dekrit Pagi + Bible App + 1 Tindakan Kebaikan + Catat di Winning App', highlight: false },
+      { date: '12-Sep', task: 'Dekrit Pagi + Saat Teduh Santai + Catat Winning App', highlight: false },
+      { date: '13-Sep', task: 'Dekrit Pagi + Ibadah Raya + Komsel JPCC + SABAT PENUH (Istirahat Total)', highlight: true },
+      { date: '14-Sep', task: 'Dekrit Pagi + Bible App + 1 Tindakan Kebaikan + Catat di Winning App', highlight: false },
+      { date: '15-Sep', task: 'Dekrit Pagi + Bible App + 1 Tindakan Kebaikan + Catat di Winning App', highlight: false },
+      { date: '16-Sep', task: 'Dekrit Pagi + Bible App + 1 Tindakan Kebaikan + Catat di Winning App', highlight: false },
+      { date: '17-Sep', task: 'Dekrit Pagi + Bible App + 1 Tindakan Kebaikan + Catat di Winning App', highlight: false },
+      { date: '18-Sep', task: 'Dekrit Pagi + Bible App + 1 Tindakan Kebaikan + Catat di Winning App', highlight: false },
+      { date: '19-Sep', task: 'Dekrit Pagi + Review Catatan Winning App Mingguan', highlight: false },
+      { date: '20-Sep', task: 'Dekrit Pagi + Ibadah Raya + Komsel JPCC + SABAT PENUH (Charge Rohani)', highlight: true },
+      { date: '21-Sep', task: 'Dekrit Pagi + Bible App + 1 Tindakan Kebaikan + Catat di Winning App', highlight: false },
+      { date: '22-Sep', task: 'Dekrit Pagi + Bible App + 1 Tindakan Kebaikan + Catat di Winning App', highlight: false },
+      { date: '23-Sep', task: 'Dekrit Pagi + Bible App + 1 Tindakan Kebaikan + Catat di Winning App', highlight: false },
+      { date: '24-Sep', task: 'Dekrit Pagi + Bible App + 1 Tindakan Kebaikan + Catat di Winning App', highlight: false },
+      { date: '25-Sep', task: 'Dekrit Pagi + Bible App + 1 Tindakan Kebaikan + Catat di Winning App', highlight: false },
+      { date: '26-Sep', task: 'Dekrit Pagi + Saat Teduh + Catat di Winning App', highlight: false },
+      { date: '27-Sep', task: 'Dekrit Pagi + Ibadah Raya + Doa Syukur Tuaian + SABAT PENUH', highlight: true },
+      { date: '28-Sep', task: 'Dekrit Pagi + Bible App + 1 Tindakan Kebaikan + Catat di Winning App', highlight: false },
+      { date: '29-Sep', task: 'Dekrit Pagi + Bible App + 1 Tindakan Kebaikan + Catat di Winning App', highlight: false },
+      { date: '30-Sep', task: 'Dekrit Pagi + Bible App + 1 Tindakan Kebaikan + Catat di Winning App', highlight: false }
+    ]
+  },
+  E2: {
+    code: 'E2',
+    name: 'Product Excellence',
+    title: 'ISCA + EMS + LPK OS',
+    quote: 'Produk yang luar biasa memulihkan martabat dan masa depan generasi.',
+    color: 'sky',
+    accentColor: 'text-sky-400',
+    borderColor: 'border-sky-500/40',
+    bgClass: 'bg-sky-950/30',
+    barColor: 'bg-sky-500',
+    tagBg: 'bg-sky-500/20 text-sky-300 border-sky-500/30',
+    actions: [
+      { id: '2.1', action: 'Standarisasi Laporan ISCA 19 Faktor (Actionable bagi ortu & siswa)', frequency: 'Mingguan (Jumat)', type: 'Sampling 3 Laporan' },
+      { id: '2.2', action: 'Paket Zero-Friction Setup EMS (Sekolah baru live < 7 hari)', frequency: 'Mingguan (Jumat)', type: 'Review Onboarding' },
+      { id: '2.3', action: 'Zero-Downtime & WA Gateway Uptime 99.9% (Anti komplain yayasan)', frequency: 'Setiap hari (Pagi)', type: 'Cek Nadi Server' },
+      { id: '2.4', action: '1 Micro-Kaizen / Product Polish (Pangkas 1 titik friksi pengguna)', frequency: 'Setiap hari', type: 'Polish UX & Copy' },
+      { id: '2.5', action: 'Blueprint & MVP LPK OS (Modul kursus, sertifikasi & job-matching)', frequency: 'Mingguan (Jumat)', type: 'Cicil 40 mnt' },
+      { id: '2.6', action: 'Voice of Customer (Guru BK, Ortu, Siswa) untuk riset fitur', frequency: 'Bulanan', type: 'Wawancara 30 mnt' },
+      { id: '2.7', action: 'Database Karir & Jalur Vokasi/Kuliah (Pembaruan tren industri)', frequency: 'Triwulanan', type: 'Riset Tren Kerja' },
+      { id: '2.8', action: 'Validitas Akademik & Keamanan Data Siswa (AI Pentest berkala)', frequency: 'Triwulanan', type: 'Security Audit' }
+    ],
+    dates: [
+      { date: '08-Sep', task: 'Cek Nadi Server & WA Gateway Uptime (5 mnt)', highlight: false },
+      { date: '09-Sep', task: 'Cek Nadi Server & WA Gateway Uptime (5 mnt)', highlight: false },
+      { date: '10-Sep', task: 'Cek Nadi Server & WA Gateway Uptime (5 mnt)', highlight: false },
+      { date: '11-Sep', task: '[Audit Produk]: Sampling 3 laporan hasil tes ISCA mingguan (20 mnt)', highlight: true },
+      { date: '12-Sep', task: 'Monitor santai kestabilan sistem cloud pendaftaran', highlight: false },
+      { date: '14-Sep', task: 'Cek Nadi Server & WA Gateway Uptime (5 mnt)', highlight: false },
+      { date: '15-Sep', task: '[Micro-Kaizen]: Screenshot halaman login/bayar ISCA, review UX 2 poin', highlight: true },
+      { date: '16-Sep', task: 'Cek Nadi Server & WA Gateway Uptime (5 mnt)', highlight: false },
+      { date: '17-Sep', task: 'Cek Nadi Server & WA Gateway Uptime (5 mnt)', highlight: false },
+      { date: '18-Sep', task: 'Cek Nadi Server & WA Gateway Uptime (5 mnt)', highlight: false },
+      { date: '19-Sep', task: 'Cek kelancaran sistem pendaftaran & kuis online siswa', highlight: false },
+      { date: '21-Sep', task: 'Cek Nadi Server & WA Gateway Uptime (5 mnt)', highlight: false },
+      { date: '22-Sep', task: '[Micro-Kaizen]: Cek 1 titik friksi pada alur tes siswa (15 mnt)', highlight: true },
+      { date: '23-Sep', task: 'Cek kesiapan infrastruktur n8n untuk lonjakan pesan WhatsApp', highlight: false },
+      { date: '24-Sep', task: 'Cek Nadi Server & WA Gateway Uptime (5 mnt)', highlight: false },
+      { date: '25-Sep', task: '[PERFORMA SISTEM]: Pantau server saat promo kuota Payday dibuka', highlight: true },
+      { date: '26-Sep', task: 'Pastikan alur payment gateway Midtrans lancar tanpa hambatan', highlight: false },
+      { date: '28-Sep', task: 'Cek Nadi Server & WA Gateway Uptime (5 mnt)', highlight: false },
+      { date: '29-Sep', task: '[Micro-Kaizen]: Evaluasi masukan perbaikan teknis dari Daris', highlight: true },
+      { date: '30-Sep', task: 'Rekap uptime server & bug laporan bulan September', highlight: false }
+    ]
+  },
+  E3: {
+    code: 'E3',
+    name: 'Marketing & Content',
+    title: '100.000 Siswa & Panggilan Mandat',
+    quote: 'Marketing adalah pelayanan distribusi kabar baik: Menyelamatkan anak dari salah jurusan.',
+    color: 'amber',
+    accentColor: 'text-amber-400',
+    borderColor: 'border-amber-500/40',
+    bgClass: 'bg-amber-950/30',
+    barColor: 'bg-amber-500',
+    tagBg: 'bg-amber-500/20 text-amber-300 border-amber-500/30',
+    actions: [
+      { id: '3.1', action: 'Otomatisasi Comment-to-DM (n8n + WA Gateway/Twilio)', frequency: 'Setup 1x + Pantau berkala', type: 'Marketing Automation' },
+      { id: '3.2', action: 'Kampanye Tangkap Vakum Penutupan Rencanamu (SEO & Ads)', frequency: 'Mingguan (Batch)', type: 'Campaign Hijack' },
+      { id: '3.3', action: 'Meta Ads Click-to-WhatsApp (Anchor Rp 129jt vs Rp 120rb)', frequency: 'Always-on (Harian)', type: 'Paid Traffic' },
+      { id: '3.4', action: 'Blueprint Konten Bulanan (4 Pilar Formula Edukasi & Otoritas)', frequency: 'Bulanan (Tgl 25)', type: 'Content Planning' },
+      { id: '3.5', action: '3 Carousel Edukasi Ortu per Minggu (Parent-Centric)', frequency: 'Mingguan (Senin)', type: 'Organic Social' },
+      { id: '3.6', action: '2 Video Reels Santai / UGC per Minggu (Reach Engine)', frequency: 'Mingguan (Rabu)', type: 'Shorts & Reels' },
+      { id: '3.7', action: 'Payday Flash Sale Rp 70.000 (Tgl 25-28 / 48 Jam)', frequency: 'Bulanan (Tgl 25)', type: 'Flash Sale WA' },
+      { id: '3.8', action: '1 Studi Kasus / Testimoni Nyata Sekolah Mitra', frequency: 'Bulanan', type: 'Social Proof' }
+    ],
+    dates: [
+      { date: '08-Sep', task: '[URGENT] Kirim brief ke One Brand: Buat Carousel Rencanamu Tutup', highlight: true },
+      { date: '15-Sep', task: 'Review hasil draf desain carousel Rencanamu dari One Brand sebelum tayang', highlight: false },
+      { date: '16-Sep', task: 'Rekam 2 video santai/Reels di HP (Hook: Biaya salah jurusan Rp 129jt vs tes bakat Rp 120rb)', highlight: true },
+      { date: '23-Sep', task: 'Setting n8n & draft broadcast untuk persiapan Promo Payday Rp 70.000 (periode tgl 25–28)', highlight: true }
+    ]
+  },
+  E4: {
+    code: 'E4',
+    name: 'Sales & Partnerships',
+    title: '1.000 Sekolah & Ekosistem B2B2C',
+    quote: 'Sales adalah menghadirkan rasa aman dan kejelasan bagi pimpinan yayasan.',
+    color: 'emerald',
+    accentColor: 'text-emerald-400',
+    borderColor: 'border-emerald-500/40',
+    bgClass: 'bg-emerald-950/30',
+    barColor: 'bg-emerald-500',
+    tagBg: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30',
+    actions: [
+      { id: '4.1', action: 'Battle-Tested Pitch Deck Zero-Cost B2B2C (Standar Kalam Kudus)', frequency: 'Milestone Teruji', type: 'Sales Asset' },
+      { id: '4.2', action: 'Pipeline Lark CRM + Scrapling Kontak Pimpinan Yayasan', frequency: 'Milestone / Terus Diperbarui', type: 'Lead Engine' },
+      { id: '4.3', action: 'Skema Referral Dana Beasiswa & Free Tier PPDB', frequency: 'Milestone', type: 'Incentive Model' },
+      { id: '4.4', action: 'B2C-to-B2B Trojan Horse (Pintu Masuk Guru BK dari data siswa)', frequency: 'Mingguan', type: 'Account Based Sales' },
+      { id: '4.5', action: 'Aliansi Strategis Edubazar (Pak Reza) untuk kemitraan massal', frequency: 'Milestone', type: 'Channel Partner' },
+      { id: '4.6', action: 'Minimum 2 Pitch Meeting per Minggu dengan yayasan/sekolah', frequency: 'Mingguan', type: 'Sales Rhythm' },
+      { id: '4.7', action: 'Follow-up Disiplin via Sistem Fruitfulday', frequency: 'Mingguan (Kamis)', type: 'CRM Follow-up' },
+      { id: '4.8', action: 'Roadmap 1.000 Sekolah (2026: Target 20 Sekolah Q4)', frequency: 'Milestone', type: 'Growth Target' }
+    ],
+    dates: [
+      { date: '10-Sep', task: 'Buka Fruitfulday: Jalankan Follow-up Jam ke 5 sekolah lama & kontak Pak Reza (Edubazar)', highlight: true },
+      { date: '14-Sep', task: '[Hunting Sales]: Cari 5 kontak baru pimpinan yayasan sekolah via LinkedIn/kenalan', highlight: true },
+      { date: '17-Sep', task: '[Trojan Horse B2C]: Hubungi 3 Guru BK dari sekolah asal siswa yang pernah tes mandiri di Better Future', highlight: true }
+    ]
+  },
+  E5: {
+    code: 'E5',
+    name: 'Revenue Engine',
+    title: 'Cashflow, Persepuluhan, Menuju Rp 9 Miliar',
+    quote: 'Uang adalah bahan bakar mandat: Menghidupi keluarga, karyawan, klinik, & sekolah.',
+    color: 'yellow',
+    accentColor: 'text-yellow-400',
+    borderColor: 'border-yellow-500/40',
+    bgClass: 'bg-yellow-950/30',
+    barColor: 'bg-yellow-500',
+    tagBg: 'bg-yellow-500/20 text-yellow-300 border-yellow-500/30',
+    actions: [
+      { id: '5.1', action: 'Persepuluhan & Giving Roadmap (First Fruit 10% + Giving bertahap)', frequency: 'Setiap Pemasukan', type: 'Disiplin Finansial' },
+      { id: '5.2', action: 'Four-Pocket Bank System (PT, Pribadi, Pajak, Legacy Fund)', frequency: 'Milestone 100% Aktif', type: 'Alokasi Kas' },
+      { id: '5.3', action: 'Roadmap Pelunasan Hutang Terstruktur & Bebas Beban', frequency: 'Milestone', type: 'Debt Free Roadmap' },
+      { id: '5.4', action: 'Struktur Harga B2B (Rp 35k/bln) & B2C (Rp 120k/Rp 70k flash)', frequency: 'Milestone Teruji', type: 'Pricing Strategy' },
+      { id: '5.5', action: 'Value Ladder (dr. Teguh, Univ Matching, Komunitas WA Premium)', frequency: 'Monetisasi Multi-Layer', type: 'LTV Expansion' },
+      { id: '5.6', action: 'Aliansi Strategis Dr. Robbani Affan S.T., M.Pd untuk akreditasi', frequency: 'Milestone', type: 'Expert Backing' },
+      { id: '5.7', action: 'Reinvestasi 20% Ads via Agency One Brand (ROAS Target 3.5x)', frequency: 'Bulanan', type: 'Paid Acquisition' },
+      { id: '5.8', action: 'Laporan Keuangan & P&L Tanggal 1 (Bareng Pinkan & Ci Rina)', frequency: 'Bulanan (Tgl 1)', type: 'Financial Close' }
+    ],
+    dates: [
+      { date: '25-Sep', task: '[GO-LIVE PAYDAY PROMO]: Rilis Flash Sale Rp 70.000 (48 jam) ke database WA & IG Stories', highlight: true },
+      { date: '26-Sep', task: 'Pantau arus kas masuk dari Payday promo; koordinasi dengan tim CS (Yusup & Ocha)', highlight: false },
+      { date: '30-Sep', task: '[Financial Close]: Rapat kas bareng Pinkan & Ci Rina: Cek omset September, laba bersih, & transfer rutin ke Legacy Fund 2030', highlight: true }
+    ]
+  },
+  E6: {
+    code: 'E6',
+    name: 'Team & Operations',
+    title: 'Membangun Pasukan & Eksekusi Tanpa Burnout',
+    quote: 'Jenderal memimpin pasukan dengan visi yang jelas dan apresiasi yang tulus.',
+    color: 'teal',
+    accentColor: 'text-teal-400',
+    borderColor: 'border-teal-500/40',
+    bgClass: 'bg-teal-950/30',
+    barColor: 'bg-teal-500',
+    tagBg: 'bg-teal-500/20 text-teal-300 border-teal-500/30',
+    actions: [
+      { id: '6.1', action: 'Squad Inti 6 Orang + Agency Mitra (Hermes, Daris, Yusup, Ocha, Hani, Pinkan)', frequency: 'Formasi Aktif', type: 'Human Capital' },
+      { id: '6.2', action: 'SOP Onboarding Sekolah (Pangkas dari 7 hari menuju < 48 jam)', frequency: 'Milestone', type: 'Operational Efficiency' },
+      { id: '6.3', action: 'Dokumen Budaya Mandat & Sistem 5 Ide Kaizen/Bulan per Anggota Tim', frequency: 'Bulanan', type: 'Continuous Improvement' },
+      { id: '6.4', action: 'Weekly Standup Senin 09.00 WIB (Google Calendar Locked)', frequency: 'Mingguan (Senin 09.00)', type: 'Team Alignment' },
+      { id: '6.5', action: 'Apresiasi Tim & Weekly Wins Jumat 16.00 WIB (Sebelum Sabat)', frequency: 'Mingguan (Jumat 16.00)', type: 'Morale & Culture' },
+      { id: '6.6', action: 'Ritme Mandiri Founder (Fruitfulday & Winning App)', frequency: 'Setiap hari', type: 'Personal Flow' },
+      { id: '6.7', action: 'One-on-One Lunch Mingguan (Bergilir mendengarkan staf)', frequency: 'Mingguan', type: 'Leadership Care' },
+      { id: '6.8', action: 'Skema Bagi Hasil / Profit Sharing Resmi Terikat Kontrak', frequency: 'Milestone', type: 'Partnership Growth' }
+    ],
+    dates: [
+      { date: '11-Sep', task: '16.00 WIB: Weekly Wins Standup bareng tim 6 orang di Google Calendar (15 mnt)', highlight: true },
+      { date: '14-Sep', task: '09.00 WIB: Standup Senin Tim 6 Orang di Google Calendar (30 mnt)', highlight: true },
+      { date: '18-Sep', task: '16.00 WIB: Weekly Wins Standup + Apresiasi tim atas kerja keras minggu ini', highlight: true },
+      { date: '21-Sep', task: '09.00 WIB: Standup Senin Tim 6 Orang di Google Calendar (30 mnt)', highlight: true },
+      { date: '24-Sep', task: 'One-on-One Lunch santai bareng Hermes / Daris (dengarkan kendala operasional & ide mereka)', highlight: true },
+      { date: '25-Sep', task: '16.00 WIB: Weekly Wins Standup bareng tim sebelum masuk akhir pekan', highlight: true },
+      { date: '28-Sep', task: '09.00 WIB: Standup Tim + Tarik 5 ide perbaikan bulanan (Kaizen) dari masing-masing 6 staf internal', highlight: true }
+    ]
+  },
+  E7: {
+    code: 'E7',
+    name: 'Brand & Trust',
+    title: 'Reputasi, Otoritas Ilmiah, Karakter',
+    quote: 'Brand adalah rasa aman yang dirasakan orang tua saat menyerahkan masa depan anak mereka.',
+    color: 'rose',
+    accentColor: 'text-rose-400',
+    borderColor: 'border-rose-500/40',
+    bgClass: 'bg-rose-950/30',
+    barColor: 'bg-rose-500',
+    tagBg: 'bg-rose-500/20 text-rose-300 border-rose-500/30',
+    actions: [
+      { id: '7.1', action: 'Whitepaper Metodologi 19 Faktor (Berdasarkan ribuan data siswa)', frequency: 'Milestone', type: 'Scientific Authority' },
+      { id: '7.2', action: 'E-Book Anakku Mau Jadi Apa & Komunitas WA Ortu (dr. Teguh)', frequency: 'Milestone', type: 'Authority Lead Magnet' },
+      { id: '7.3', action: 'Vault Testimoni Video (6 Siswa Ketapang tukar tes gratis)', frequency: 'Rutinitas Kemitraan', type: 'Social Proof' },
+      { id: '7.4', action: 'LinkedIn Thought Leadership (Artikel pendidikan membidik yayasan)', frequency: 'Mingguan (30 mnt)', type: 'Executive Presence' },
+      { id: '7.5', action: 'Event Akbar Parenting 3 Oktober di SKK Cibubur', frequency: 'Milestone (3 Okt)', type: 'Public Speaking' },
+      { id: '7.6', action: 'Liputan Media PR Nasional Terarah seputar transformasi digital sekolah', frequency: 'Milestone', type: 'PR & Credibility' },
+      { id: '7.7', action: 'Garansi Selebrasi Masuk Jurusan & Retur CS 14 Hari Tanpa Ribet', frequency: 'Milestone', type: 'Risk Reversal' },
+      { id: '7.8', action: 'Karakter Pribadi: Menjaga Mulut & Jeda 3 Detik sebelum bicara', frequency: 'Setiap hari (Harian)', type: 'Integritas & Karakter' }
+    ],
+    dates: [
+      { date: '08-Sep', task: 'Latihan Aturan Jeda 3 Detik sebelum merespons bicara', highlight: false },
+      { date: '09-Sep', task: '[QUICK WIN] Hubungi 6 siswa Ketapang untuk video testimoni 30 detik (tukar voucher/tes gratis)', highlight: true },
+      { date: '10-Sep', task: 'Latihan Aturan Jeda 3 Detik sebelum merespons bicara', highlight: false },
+      { date: '11-Sep', task: 'Latihan Aturan Jeda 3 Detik sebelum merespons bicara', highlight: false },
+      { date: '12-Sep', task: 'Luangkan 20 menit: Minta AI bantu draf 1 artikel LinkedIn tentang Krisis Salah Jurusan Anak SMA', highlight: true },
+      { date: '14-Sep', task: 'Latihan Aturan Jeda 3 Detik sebelum merespons bicara', highlight: false },
+      { date: '15-Sep', task: 'Latihan Aturan Jeda 3 Detik sebelum merespons bicara', highlight: false },
+      { date: '16-Sep', task: 'Latihan Aturan Jeda 3 Detik sebelum merespons bicara', highlight: false },
+      { date: '17-Sep', task: 'Latihan Aturan Jeda 3 Detik sebelum merespons bicara', highlight: false },
+      { date: '18-Sep', task: 'Latihan Aturan Jeda 3 Detik sebelum merespons bicara', highlight: false },
+      { date: '19-Sep', task: 'Evaluasi ketenangan diri: Refleksikan momen di mana kamu berhasil menahan bicara pekan ini', highlight: true },
+      { date: '21-Sep', task: 'Mulai susun materi seminar parenting untuk event 3 Okt di SKK Cibubur bareng dr. Teguh', highlight: true },
+      { date: '22-Sep', task: 'Hubungi dr. Teguh: Sinkronisasi draf E-Book Anakku Mau Jadi Apa untuk hadiah seminar ortu', highlight: true },
+      { date: '23-Sep', task: 'Latihan Aturan Jeda 3 Detik sebelum merespons bicara', highlight: false },
+      { date: '24-Sep', task: 'Latihan Aturan Jeda 3 Detik sebelum merespons bicara', highlight: false },
+      { date: '25-Sep', task: 'Latihan Aturan Jeda 3 Detik sebelum merespons bicara', highlight: false },
+      { date: '28-Sep', task: 'Latihan Aturan Jeda 3 Detik sebelum merespons bicara', highlight: false },
+      { date: '29-Sep', task: 'Final rehearsal materi slide & rundown acara seminar parenting 3 Oktober di SKK Cibubur', highlight: true },
+      { date: '30-Sep', task: 'Latihan Aturan Jeda 3 Detik sebelum merespons bicara', highlight: false }
+    ]
+  },
+  E8: {
+    code: 'E8',
+    name: 'Legacy Infrastructure',
+    title: '5 Klinik Jiwa & 2 LPK Vokasi IT',
+    quote: 'Monumen kasih nyata yang memutus kutuk kemiskinan generasi.',
+    color: 'slate',
+    accentColor: 'text-slate-300',
+    borderColor: 'border-slate-500/40',
+    bgClass: 'bg-slate-900/50',
+    barColor: 'bg-slate-400',
+    tagBg: 'bg-slate-500/20 text-slate-300 border-slate-500/30',
+    actions: [
+      { id: '8.1', action: 'Yayasan Nirlaba Resmi Kemenkumham (Target 2027/2028 berbadan hukum)', frequency: 'Milestone', type: 'Badan Hukum' },
+      { id: '8.2', action: 'Injeksi Kas Legacy Fund (Aktif sejak 7 Sep 2026 dari profit PT)', frequency: 'Setiap Pemasukan / Bulanan', type: 'Tabungan Mandat' },
+      { id: '8.3', action: 'Cetak Biru 5 Klinik Pemulihan Jiwa/Mental bersama Dr. Teguh', frequency: 'Milestone', type: 'Klinik Jiwa' },
+      { id: '8.4', action: 'Kurikulum 2 LPK Vokasi IT Siap Kerja 3-6 Bulan (AI Operator, Dev, QA)', frequency: 'Mingguan / Cicilan Modul', type: 'LPK Vokasi' },
+      { id: '8.5', action: 'Kemitraan Penyaluran Kerja Domestik & P3MI Luar Negeri', frequency: 'Milestone', type: 'Job Placement' },
+      { id: '8.6', action: 'Penetapan Lokasi Terkendali (Kantong Kumuh DKI / Banten)', frequency: 'Milestone', type: 'Land & Location' },
+      { id: '8.7', action: 'Groundbreaking Fasilitas #1 & Syukuran UI-Digital ke-3', frequency: 'Milestone', type: 'Groundbreaking' },
+      { id: '8.8', action: 'Social Franchise Model: 5 Klinik & 2 LPK Genap Berdiri 2030', frequency: 'Mandat 2030', type: 'Generational Legacy' }
+    ],
+    dates: [
+      { date: '18-Sep', task: '[LPK OS]: Cicil 40 mnt modul vokasi IT di folder parrolinggo > lpk (daftar keahlian siap kerja)', highlight: true },
+      { date: '30-Sep', task: 'Transfer alokasi laba bersih bulanan PT ke Rekening Legacy Fund 2030', highlight: true }
+    ]
+  }
+};

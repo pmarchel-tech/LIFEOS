@@ -1,0 +1,789 @@
+[
+  {
+    "id": "rec-csv-1-mty2j95g",
+    "task": "OPEN REPLY",
+    "priority": "P1",
+    "project": "BETTER FUTURE",
+    "status": "In Review",
+    "taskLeader": "Daris",
+    "businessLine": "MARKETING",
+    "element": "E3",
+    "startTime": "2026-09-10",
+    "dueDate": "2026-09-10",
+    "dueTime": "09:00",
+    "reminder": "NONE",
+    "notes": "Jadi dia kaya twillio pak cuman kalo twillio kita pake pihak ke 3, nah pihak ke 3nya kita deploy sendiri. jaid menurut daris harusya ok",
+    "updates": [
+      {
+        "id": "upd-1-1",
+        "date": "2026-09-11",
+        "text": "Jadi dia kaya twillio pak cuman kalo twillio kita pake pihak ke 3, nah pihak ke 3nya kita deploy sendiri. jaid menurut daris harusya ok",
+        "createdAt": "2026-09-12T07:33:25.396Z"
+      }
+    ]
+  },
+  {
+    "id": "rec-csv-2-mty2j95g",
+    "task": "OPEN WA",
+    "priority": "P1",
+    "project": "BETTER FUTURE",
+    "status": "In Review",
+    "taskLeader": "Daris",
+    "businessLine": "MARKETING",
+    "element": "E3",
+    "startTime": "2026-09-10",
+    "dueDate": "2026-09-10",
+    "dueTime": "09:00",
+    "reminder": "NONE",
+    "notes": "open wa ini sudah berhasil kalau dari sisi daris, namun tetep harus di pikirin gimana caranya reduce si twillio. tiggal connectin nomornya saja",
+    "updates": [
+      {
+        "id": "upd-2-1",
+        "date": "2026-09-11",
+        "text": "open wa ini sudah berhasil kalau dari sisi daris, namun tetep harus di pikirin gimana caranya reduce si twillio. tiggal connectin nomornya saja",
+        "createdAt": "2026-09-12T07:33:25.396Z"
+      }
+    ]
+  },
+  {
+    "id": "rec-csv-3-mty2j95g",
+    "task": "Register your Android developer verification Sep 30, 2026",
+    "priority": "P1",
+    "project": "UID",
+    "status": "Ongoing",
+    "taskLeader": "Daris",
+    "businessLine": "EMS",
+    "element": "E2",
+    "startTime": "2026-09-16",
+    "dueDate": "2026-09-16",
+    "dueTime": "09:00",
+    "reminder": "NONE",
+    "notes": "walalupun duenya akhi rbulan better di follow up tiap minggu",
+    "updates": [
+      {
+        "id": "upd-3-1",
+        "date": "2026-09-11",
+        "text": "walalupun duenya akhi rbulan better di follow up tiap minggu",
+        "createdAt": "2026-09-12T07:33:25.396Z"
+      }
+    ]
+  },
+  {
+    "id": "rec-csv-4-mty2j95g",
+    "task": "IOT JOHNSON 20 PCS",
+    "priority": "P1",
+    "project": "UID",
+    "status": "Ongoing",
+    "taskLeader": "Daris",
+    "businessLine": "EMS",
+    "element": "E2",
+    "startTime": "2026-09-18",
+    "dueDate": "2026-09-18",
+    "dueTime": "09:00",
+    "reminder": "NONE",
+    "notes": "udah liat dan udah wa johnson untuk dp",
+    "updates": [
+      {
+        "id": "upd-4-1",
+        "date": "2026-09-11",
+        "text": "udah liat dan udah wa johnson untuk dp",
+        "createdAt": "2026-09-12T07:33:25.396Z"
+      }
+    ]
+  },
+  {
+    "id": "rec-csv-5-mty2j95g",
+    "task": "INTEGRASI DENGAN EMS",
+    "priority": "P1",
+    "project": "UID",
+    "status": "Ongoing",
+    "taskLeader": "Daris",
+    "businessLine": "EMS",
+    "element": "E2",
+    "startTime": "2026-09-18",
+    "dueDate": "2026-09-18",
+    "dueTime": "09:00",
+    "reminder": "NONE",
+    "notes": "",
+    "updates": []
+  },
+  {
+    "id": "rec-csv-6-mty2j95g",
+    "task": "VEBE SKK - MINTA PAKETNYA KAYAK GIMANA",
+    "priority": "P1",
+    "project": "OPTY",
+    "status": "Ongoing",
+    "taskLeader": "dr. Teguh",
+    "businessLine": "BETTER FUTURE",
+    "element": "E2",
+    "startTime": "2026-09-14",
+    "dueDate": "2026-09-14",
+    "dueTime": "09:00",
+    "reminder": "NONE",
+    "notes": "Kemarin sudah berdiskusi dengan dokter Teguh; nanti dia akan mencoba membuat semacam share‑paper atau pekat‑pekatnya untuk sekolah. Referensinya baru satu persen. Namun ada kekhawatiran karena satu persen seharusnya tidak boleh ada, karena bukan hanya psikologi, maksudnya S2 psikologi; jadi dia tidak boleh memberikan saran.",
+    "updates": [
+      {
+        "id": "upd-6-1",
+        "date": "2026-09-11",
+        "text": "Kemarin sudah berdiskusi dengan dokter Teguh; nanti dia akan mencoba membuat semacam share‑paper atau pekat‑pekatnya untuk sekolah. Referensinya baru satu persen. Namun ada kekhawatiran karena satu persen seharusnya tidak boleh ada, karena bukan hanya psikologi, maksudnya S2 psikologi; jadi dia tidak boleh memberikan saran.",
+        "createdAt": "2026-09-12T07:33:25.396Z"
+      }
+    ]
+  },
+  {
+    "id": "rec-csv-7-mty2j95h",
+    "task": "BELJM GO LIVE2",
+    "priority": "P1",
+    "project": "SKK MEDAN",
+    "status": "Follow Up",
+    "taskLeader": "Hermes",
+    "businessLine": "EMS",
+    "element": "E2",
+    "startTime": "2026-09-14",
+    "dueDate": "2026-09-14",
+    "dueTime": "09:00",
+    "reminder": "NONE",
+    "notes": "yusup wa : \nSelamat siang pak, tadi saya dapat telepon dari pak Suwandi, untuk data akademik sudah aman pak, tinggal no kartu RFID yang di pakai siswa untuk absensi pak, itu kata pak Suwandi bukan wewenangnya lagi, jadi pak Suwandi ngga tau lagi tentang itu pak, jadi tinggal no rfidnya pak, agar bisa go live, itu kata pak Suwandi, pak🙏🏻",
+    "updates": [
+      {
+        "id": "upd-7-1",
+        "date": "2026-09-11",
+        "text": "yusup wa : \nSelamat siang pak, tadi saya dapat telepon dari pak Suwandi, untuk data akademik sudah aman pak, tinggal no kartu RFID yang di pakai siswa untuk absensi pak, itu kata pak Suwandi bukan wewenangnya lagi, jadi pak Suwandi ngga tau lagi tentang itu pak, jadi tinggal no rfidnya pak, agar bisa go live, itu kata pak Suwandi, pak🙏🏻",
+        "createdAt": "2026-09-12T07:33:25.397Z"
+      }
+    ]
+  },
+  {
+    "id": "rec-csv-8-mty2j95h",
+    "task": "SUDAH KENALKAN HERMES DENGAN IDN UNTUK B2B",
+    "priority": "P2",
+    "project": "UID",
+    "status": "In Review",
+    "taskLeader": "Hermes",
+    "businessLine": "MARKETING",
+    "element": "E3",
+    "startTime": "2026-09-14",
+    "dueDate": "2026-09-14",
+    "dueTime": "09:00",
+    "reminder": "NONE",
+    "notes": "UNTUK KONTAK SUDAH DIBERIKAN KE HERMES",
+    "updates": [
+      {
+        "id": "upd-8-1",
+        "date": "2026-09-11",
+        "text": "UNTUK KONTAK SUDAH DIBERIKAN KE HERMES",
+        "createdAt": "2026-09-12T07:33:25.397Z"
+      }
+    ]
+  },
+  {
+    "id": "rec-csv-9-mty2j95h",
+    "task": "SUDAH KASIH LIST UNTUK SEKOLAH2 DI BANTEN KE HERMES",
+    "priority": "P2",
+    "project": "UID",
+    "status": "In Review",
+    "taskLeader": "Hermes",
+    "businessLine": "MARKETING",
+    "element": "E3",
+    "startTime": "2026-09-14",
+    "dueDate": "2026-09-14",
+    "dueTime": "09:00",
+    "reminder": "NONE",
+    "notes": "FILE SUDAH DIBERIKAN HERRMES",
+    "updates": [
+      {
+        "id": "upd-9-1",
+        "date": "2026-09-07",
+        "text": "FILE SUDAH DIBERIKAN HERRMES",
+        "createdAt": "2026-09-12T07:33:25.397Z"
+      }
+    ]
+  },
+  {
+    "id": "rec-csv-10-mty2j95h",
+    "task": "FADHIL ZAKARIA - NURUL QURAN ACEH",
+    "priority": "P1",
+    "project": "OPTY",
+    "status": "Follow Up",
+    "taskLeader": "Hermes",
+    "businessLine": "EMS",
+    "element": "E2",
+    "startTime": "2026-09-18",
+    "dueDate": "2026-09-18",
+    "dueTime": "09:00",
+    "reminder": "NONE",
+    "notes": "NOMOR SUDAH DI KASIH SAMA PAK HAJI FAUZAN +62 822-6463-1994, TK, SD, SMP SUDAH SAMPAI 1000 KATANYA",
+    "updates": [
+      {
+        "id": "upd-10-1",
+        "date": "2026-09-11",
+        "text": "NOMOR SUDAH DI KASIH SAMA PAK HAJI FAUZAN +62 822-6463-1994, TK, SD, SMP SUDAH SAMPAI 1000 KATANYA",
+        "createdAt": "2026-09-12T07:33:25.397Z"
+      }
+    ]
+  },
+  {
+    "id": "rec-csv-11-mty2j95h",
+    "task": "PKS SI PAPER",
+    "priority": "P1",
+    "project": "SKK PEMATANG SIANTAR",
+    "status": "Follow Up",
+    "taskLeader": "MELDA",
+    "businessLine": "EMS",
+    "element": "E2",
+    "startTime": "2026-09-14",
+    "dueDate": "2026-09-14",
+    "dueTime": "09:00",
+    "reminder": "NONE",
+    "notes": "uda wa si melda lagi kemarin sudah hari ini udah sudah di kasih melda dan aku akan coba review",
+    "updates": [
+      {
+        "id": "upd-11-1",
+        "date": "2026-09-11",
+        "text": "uda wa si melda lagi kemarin sudah hari ini udah sudah di kasih melda dan aku akan coba review",
+        "createdAt": "2026-09-12T07:33:25.397Z"
+      }
+    ]
+  },
+  {
+    "id": "rec-csv-12-mty2j95h",
+    "task": "Data murid REC",
+    "priority": "P1",
+    "project": "REC",
+    "status": "Ongoing",
+    "taskLeader": "Ocha",
+    "businessLine": "EMS",
+    "element": "E2",
+    "startTime": "2026-09-14",
+    "dueDate": "2026-09-14",
+    "dueTime": "09:00",
+    "reminder": "NONE",
+    "notes": "",
+    "updates": []
+  },
+  {
+    "id": "rec-csv-13-mty2j95h",
+    "task": "SKK PEMATANG SIANTAR",
+    "priority": "P0",
+    "project": "SKK PEMATANG SIANTAR",
+    "status": "Follow Up",
+    "taskLeader": "Pierre Marchel",
+    "businessLine": "EMS",
+    "element": "E2",
+    "startTime": "2026-09-10",
+    "dueDate": "2026-09-10",
+    "dueTime": "09:00",
+    "reminder": "NONE",
+    "notes": "",
+    "updates": []
+  },
+  {
+    "id": "rec-csv-14-mty2j95h",
+    "task": "MTA - ACSENT PLACEMENT",
+    "priority": "P1",
+    "project": "MTA",
+    "status": "Ongoing",
+    "taskLeader": "Pierre Marchel",
+    "businessLine": "ACSENT",
+    "element": "E2",
+    "startTime": "2026-09-12",
+    "dueDate": "2026-09-12",
+    "dueTime": "09:00",
+    "reminder": "NONE",
+    "notes": "untuk seoal akan kita bisa tambahkan, time, dan juga untuk copy paste itu yang sudah. buka tab / pindah tab. \nspeaking ada tergantung dari komputernya.  dan akan di buatkan test untuk speaking \nscoring, \nlistneing hanya boleh 2x saja. dan ga bisa fast forward.\ndeploy akan di berikan wakutnya untuk supaya bsia di test lagi.",
+    "updates": [
+      {
+        "id": "upd-14-1",
+        "date": "2026-09-11",
+        "text": "untuk seoal akan kita bisa tambahkan, time, dan juga untuk copy paste itu yang sudah. buka tab / pindah tab. \nspeaking ada tergantung dari komputernya.  dan akan di buatkan test untuk speaking \nscoring, \nlistneing hanya boleh 2x saja. dan ga bisa fast forward.\ndeploy akan di berikan wakutnya untuk supaya bsia di test lagi.",
+        "createdAt": "2026-09-12T07:33:25.397Z"
+      }
+    ]
+  },
+  {
+    "id": "rec-csv-15-mty2j95h",
+    "task": "INVOICE",
+    "priority": "P0",
+    "project": "SKK PEMATANG SIANTAR",
+    "status": "Ongoing",
+    "taskLeader": "Pierre Marchel",
+    "businessLine": "EMS",
+    "element": "E2",
+    "startTime": "2026-09-14",
+    "dueDate": "2026-09-14",
+    "dueTime": "09:00",
+    "reminder": "NONE",
+    "notes": "INVOICE SUDAH DIKRIMKNA PER SENIN NANTI AKAN DI KIRIMKAN LAGI DAN UPDATE",
+    "updates": [
+      {
+        "id": "upd-15-1",
+        "date": "2026-09-10",
+        "text": "INVOICE SUDAH DIKRIMKNA PER SENIN NANTI AKAN DI KIRIMKAN LAGI DAN UPDATE",
+        "createdAt": "2026-09-12T07:33:25.397Z"
+      }
+    ]
+  },
+  {
+    "id": "rec-csv-16-mty2j95h",
+    "task": "REVIEW PIXEL",
+    "priority": "P1",
+    "project": "BETTER FUTURE",
+    "status": "Ongoing",
+    "taskLeader": "Pierre Marchel",
+    "businessLine": "MARKETING",
+    "element": "E3",
+    "startTime": "2026-09-14",
+    "dueDate": "2026-09-14",
+    "dueTime": "09:00",
+    "reminder": "NONE",
+    "notes": "kalau dari william bilang katana belum ada di meta pixel dan minta di setup ulang",
+    "updates": [
+      {
+        "id": "upd-16-1",
+        "date": "2026-09-11",
+        "text": "kalau dari william bilang katana belum ada di meta pixel dan minta di setup ulang",
+        "createdAt": "2026-09-12T07:33:25.397Z"
+      }
+    ]
+  },
+  {
+    "id": "rec-csv-17-mty2j95h",
+    "task": "REVIEW ADS",
+    "priority": "P1",
+    "project": "BETTER FUTURE",
+    "status": "Ongoing",
+    "taskLeader": "Pierre Marchel",
+    "businessLine": "MARKETING",
+    "element": "E3",
+    "startTime": "2026-09-14",
+    "dueDate": "2026-09-14",
+    "dueTime": "09:00",
+    "reminder": "NONE",
+    "notes": "",
+    "updates": []
+  },
+  {
+    "id": "rec-csv-18-mty2j95h",
+    "task": "PKS FINAL",
+    "priority": "P1",
+    "project": "SKK PEMATANG SIANTAR",
+    "status": "Follow Up",
+    "taskLeader": "Pierre Marchel",
+    "businessLine": "EMS",
+    "element": "E2",
+    "startTime": "2026-09-14",
+    "dueDate": "2026-09-14",
+    "dueTime": "09:00",
+    "reminder": "NONE",
+    "notes": "update katanya ada 2 yayasan belum bisa di hubungi. dan lagi minta untuk di hubungi spaya bisa beres, perkiraan senin lah beres.",
+    "updates": [
+      {
+        "id": "upd-18-1",
+        "date": "2026-09-11",
+        "text": "update katanya ada 2 yayasan belum bisa di hubungi. dan lagi minta untuk di hubungi spaya bisa beres, perkiraan senin lah beres.",
+        "createdAt": "2026-09-12T07:33:25.397Z"
+      }
+    ]
+  },
+  {
+    "id": "rec-csv-19-mty2j95h",
+    "task": "DMA - SAP DAN LOGISTIC",
+    "priority": "P1",
+    "project": "DMA",
+    "status": "Follow Up",
+    "taskLeader": "Pierre Marchel",
+    "businessLine": "PERSONAL",
+    "element": "E2",
+    "startTime": "2026-09-14",
+    "dueDate": "2026-09-14",
+    "dueTime": "09:00",
+    "reminder": "NONE",
+    "notes": "",
+    "updates": []
+  },
+  {
+    "id": "rec-csv-20-mty2j95h",
+    "task": "RUBAH SOLUITON PROPOSAL UNTUK MASUKIN BETTER FUTURE",
+    "priority": "P1",
+    "project": "BETTER FUTURE",
+    "status": "Not yet started",
+    "taskLeader": "Pierre Marchel",
+    "businessLine": "BETTER FUTURE",
+    "element": "E2",
+    "startTime": "2026-09-14",
+    "dueDate": "2026-09-14",
+    "dueTime": "09:00",
+    "reminder": "NONE",
+    "notes": "",
+    "updates": []
+  },
+  {
+    "id": "rec-csv-21-mty2j95h",
+    "task": "OPTY DARI YUDI LPK CEK",
+    "priority": "P2",
+    "project": "OPTY",
+    "status": "Follow Up",
+    "taskLeader": "Pierre Marchel",
+    "businessLine": "LPK OS",
+    "element": "E2",
+    "startTime": "2026-09-14",
+    "dueDate": "2026-09-14",
+    "dueTime": "09:00",
+    "reminder": "NONE",
+    "notes": "sudah wa si yudi juga untuk minta nomornya aja jadi bisa foloow up dengan gampang.",
+    "updates": [
+      {
+        "id": "upd-21-1",
+        "date": "2026-09-11",
+        "text": "sudah wa si yudi juga untuk minta nomornya aja jadi bisa foloow up dengan gampang.",
+        "createdAt": "2026-09-12T07:33:25.397Z"
+      }
+    ]
+  },
+  {
+    "id": "rec-csv-22-mty2j95h",
+    "task": "INVOICE SEISO",
+    "priority": "P2",
+    "project": "UID",
+    "status": "In Review",
+    "taskLeader": "Pierre Marchel",
+    "businessLine": "EMS",
+    "element": "E2",
+    "startTime": "2026-09-14",
+    "dueDate": "2026-09-14",
+    "dueTime": "09:00",
+    "reminder": "NONE",
+    "notes": "",
+    "updates": []
+  },
+  {
+    "id": "rec-csv-23-mty2j95h",
+    "task": "SI SKK MEDAN BATAL JADINYA INVOICE GIMANA ?",
+    "priority": "P1",
+    "project": "BETTER FUTURE",
+    "status": "Follow Up",
+    "taskLeader": "Pierre Marchel",
+    "businessLine": "ACSENT",
+    "element": "E2",
+    "startTime": "2026-09-15",
+    "dueDate": "2026-09-15",
+    "dueTime": "09:00",
+    "reminder": "NONE",
+    "notes": "",
+    "updates": []
+  },
+  {
+    "id": "rec-csv-24-mty2j95h",
+    "task": "SMA PGA XIV Bekasi?",
+    "priority": "P1",
+    "project": "BETTER FUTURE",
+    "status": "Not yet started",
+    "taskLeader": "Pierre Marchel",
+    "businessLine": "BETTER FUTURE",
+    "element": "E2",
+    "startTime": "2026-09-15",
+    "dueDate": "2026-09-15",
+    "dueTime": "09:00",
+    "reminder": "NONE",
+    "notes": "PLAN UNTUK ONLINE JAM 10 PAGI",
+    "updates": [
+      {
+        "id": "upd-24-1",
+        "date": "2026-09-11",
+        "text": "PLAN UNTUK ONLINE JAM 10 PAGI",
+        "createdAt": "2026-09-12T07:33:25.397Z"
+      }
+    ]
+  },
+  {
+    "id": "rec-csv-25-mty2j95h",
+    "task": "LPK OS SYNC DENGAN GO MIGRAN",
+    "priority": "P2",
+    "project": "OPTY",
+    "status": "Follow Up",
+    "taskLeader": "Pierre Marchel",
+    "businessLine": "LPK OS",
+    "element": "E2",
+    "startTime": "2026-09-15",
+    "dueDate": "2026-09-15",
+    "dueTime": "09:00",
+    "reminder": "NONE",
+    "notes": "AKAN DIKABARIN SAMA DENNIS MARI KITA FOLLOW UP DENIS TERUS.",
+    "updates": [
+      {
+        "id": "upd-25-1",
+        "date": "2026-09-11",
+        "text": "AKAN DIKABARIN SAMA DENNIS MARI KITA FOLLOW UP DENIS TERUS.",
+        "createdAt": "2026-09-12T07:33:25.397Z"
+      }
+    ]
+  },
+  {
+    "id": "rec-csv-26-mty2j95h",
+    "task": "SKK BATAM",
+    "priority": "P3",
+    "project": "OPTY",
+    "status": "Follow Up",
+    "taskLeader": "Pierre Marchel",
+    "businessLine": "EMS",
+    "element": "E2",
+    "startTime": "2026-09-15",
+    "dueDate": "2026-09-15",
+    "dueTime": "09:00",
+    "reminder": "NONE",
+    "notes": "",
+    "updates": []
+  },
+  {
+    "id": "rec-csv-27-mty2j95h",
+    "task": "SKK SORONG",
+    "priority": "P3",
+    "project": "OPTY",
+    "status": "Follow Up",
+    "taskLeader": "Pierre Marchel",
+    "businessLine": "EMS",
+    "element": "E2",
+    "startTime": "2026-09-15",
+    "dueDate": "2026-09-15",
+    "dueTime": "09:00",
+    "reminder": "NONE",
+    "notes": "",
+    "updates": []
+  },
+  {
+    "id": "rec-csv-28-mty2j95h",
+    "task": "UNIPAL DENGAN VERICO",
+    "priority": "P3",
+    "project": "OPTY",
+    "status": "Follow Up",
+    "taskLeader": "Pierre Marchel",
+    "businessLine": "EMS",
+    "element": "E2",
+    "startTime": "2026-09-15",
+    "dueDate": "2026-09-15",
+    "dueTime": "09:00",
+    "reminder": "NONE",
+    "notes": "",
+    "updates": []
+  },
+  {
+    "id": "rec-csv-29-mty2j95h",
+    "task": "KANAAN - Merry",
+    "priority": "P3",
+    "project": "OPTY",
+    "status": "Follow Up",
+    "taskLeader": "Pierre Marchel",
+    "businessLine": "EMS",
+    "element": "E2",
+    "startTime": "2026-09-15",
+    "dueDate": "2026-09-15",
+    "dueTime": "09:00",
+    "reminder": "NONE",
+    "notes": "",
+    "updates": []
+  },
+  {
+    "id": "rec-csv-30-mty2j95h",
+    "task": "MAITREYAWIRA - Nelly",
+    "priority": "P3",
+    "project": "OPTY",
+    "status": "Follow Up",
+    "taskLeader": "Pierre Marchel",
+    "businessLine": "EMS",
+    "element": "E2",
+    "startTime": "2026-09-15",
+    "dueDate": "2026-09-15",
+    "dueTime": "09:00",
+    "reminder": "NONE",
+    "notes": "",
+    "updates": []
+  },
+  {
+    "id": "rec-csv-31-mty2j95h",
+    "task": "PRESMA - MINAT BAKAT VERICO - David / mam flo",
+    "priority": "P3",
+    "project": "OPTY",
+    "status": "Follow Up",
+    "taskLeader": "Pierre Marchel",
+    "businessLine": "EMS",
+    "element": "E2",
+    "startTime": "2026-09-15",
+    "dueDate": "2026-09-15",
+    "dueTime": "09:00",
+    "reminder": "NONE",
+    "notes": "",
+    "updates": []
+  },
+  {
+    "id": "rec-csv-32-mty2j95h",
+    "task": "TUNAS BANGSA - edberg",
+    "priority": "P3",
+    "project": "OPTY",
+    "status": "Follow Up",
+    "taskLeader": "Pierre Marchel",
+    "businessLine": "EMS",
+    "element": "E2",
+    "startTime": "2026-09-15",
+    "dueDate": "2026-09-15",
+    "dueTime": "09:00",
+    "reminder": "NONE",
+    "notes": "",
+    "updates": []
+  },
+  {
+    "id": "rec-csv-33-mty2j95h",
+    "task": "METHODIST 6 - Lina",
+    "priority": "P3",
+    "project": "OPTY",
+    "status": "Follow Up",
+    "taskLeader": "Pierre Marchel",
+    "businessLine": "EMS",
+    "element": "E2",
+    "startTime": "2026-09-15",
+    "dueDate": "2026-09-15",
+    "dueTime": "09:00",
+    "reminder": "NONE",
+    "notes": "",
+    "updates": []
+  },
+  {
+    "id": "rec-csv-34-mty2j95h",
+    "task": "LAUNCH IG - BETTERFUTURE.ISCA",
+    "priority": "P1",
+    "project": "BETTER FUTURE",
+    "status": "Not yet started",
+    "taskLeader": "Pierre Marchel",
+    "businessLine": "MARKETING",
+    "element": "E3",
+    "startTime": "2026-09-18",
+    "dueDate": "2026-09-18",
+    "dueTime": "09:00",
+    "reminder": "NONE",
+    "notes": "",
+    "updates": []
+  },
+  {
+    "id": "rec-csv-35-mty2j95h",
+    "task": "SKK MEDAN",
+    "priority": "P1",
+    "project": "SKK MEDAN",
+    "status": "Ongoing",
+    "taskLeader": "Pierre Marchel",
+    "businessLine": "EMS",
+    "element": "E2",
+    "startTime": "2026-09-18",
+    "dueDate": "2026-09-18",
+    "dueTime": "09:00",
+    "reminder": "NONE",
+    "notes": "",
+    "updates": []
+  },
+  {
+    "id": "rec-csv-36-mty2j95h",
+    "task": "SERING ADA MASALAH MENGENAI VA DI HANA MULIA",
+    "priority": "P1",
+    "project": "HANA MULIA",
+    "status": "Follow Up",
+    "taskLeader": "Pierre Marchel",
+    "businessLine": "EMS",
+    "element": "E2",
+    "startTime": "2026-09-18",
+    "dueDate": "2026-09-18",
+    "dueTime": "09:00",
+    "reminder": "NONE",
+    "notes": "sudah di follow up lagi ke pak wahyu mengenai hal ini dan sudah kasih info juga mengenai daris. info dari mas wahyu better call +62 818-999-244 mas okky dari bagian va",
+    "updates": [
+      {
+        "id": "upd-36-1",
+        "date": "2026-09-11",
+        "text": "sudah di follow up lagi ke pak wahyu mengenai hal ini dan sudah kasih info juga mengenai daris. info dari mas wahyu better call +62 818-999-244 mas okky dari bagian va",
+        "createdAt": "2026-09-12T07:33:25.397Z"
+      }
+    ]
+  },
+  {
+    "id": "rec-csv-37-mty2j95h",
+    "task": "ADA OPTY DARI IDN",
+    "priority": "P1",
+    "project": "OPTY",
+    "status": "Follow Up",
+    "taskLeader": "Pierre Marchel",
+    "businessLine": "EMS",
+    "element": "E2",
+    "startTime": "2026-09-18",
+    "dueDate": "2026-09-18",
+    "dueTime": "09:00",
+    "reminder": "NONE",
+    "notes": "SUDAH DI KIRIMKNA PER TODAY",
+    "updates": [
+      {
+        "id": "upd-37-1",
+        "date": "2026-09-11",
+        "text": "SUDAH DI KIRIMKNA PER TODAY",
+        "createdAt": "2026-09-12T07:33:25.397Z"
+      }
+    ]
+  },
+  {
+    "id": "rec-csv-38-mty2j95h",
+    "task": "PERKUAT MENGENAI POS",
+    "priority": "P2",
+    "project": "UID",
+    "status": "Not yet started",
+    "taskLeader": "Pierre Marchel",
+    "businessLine": "EMS",
+    "element": "E2",
+    "startTime": "2026-09-18",
+    "dueDate": "2026-09-18",
+    "dueTime": "09:00",
+    "reminder": "NONE",
+    "notes": "musti nanti cek dengan daris gimana mekanismenya",
+    "updates": [
+      {
+        "id": "upd-38-1",
+        "date": "2026-09-11",
+        "text": "musti nanti cek dengan daris gimana mekanismenya",
+        "createdAt": "2026-09-12T07:33:25.397Z"
+      }
+    ]
+  },
+  {
+    "id": "rec-csv-39-mty2j95h",
+    "task": "BRIGHT SCHOOL LMS",
+    "priority": "P2",
+    "project": "OPTY",
+    "status": "Follow Up",
+    "taskLeader": "Pierre Marchel",
+    "businessLine": "EMS",
+    "element": "E2",
+    "startTime": "2026-09-18",
+    "dueDate": "2026-09-18",
+    "dueTime": "09:00",
+    "reminder": "NONE",
+    "notes": "",
+    "updates": []
+  },
+  {
+    "id": "rec-csv-40-mty2j95h",
+    "task": "KARTU PETRA",
+    "priority": "P1",
+    "project": "PETRA",
+    "status": "Ongoing",
+    "taskLeader": "Yusup",
+    "businessLine": "EMS",
+    "element": "E2",
+    "startTime": "2026-09-11",
+    "dueDate": "2026-09-11",
+    "dueTime": "09:00",
+    "reminder": "NONE",
+    "notes": "DARI SISI PETRA SUDAH OK DAN BISA LANGUNG KE PERCETAKAN DAN JUGA BISA KIRIM INVOICE",
+    "updates": [
+      {
+        "id": "upd-40-1",
+        "date": "2026-09-11",
+        "text": "DARI SISI PETRA SUDAH OK DAN BISA LANGUNG KE PERCETAKAN DAN JUGA BISA KIRIM INVOICE",
+        "createdAt": "2026-09-12T07:33:25.397Z"
+      }
+    ]
+  }
+]
