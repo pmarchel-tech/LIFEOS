@@ -24,12 +24,14 @@ import {
   BellOff,
   Database,
   Cloud,
-  History
+  History,
+  BarChart3
 } from 'lucide-react';
 import { MANDATE, ELEMENTS, PRIORITIES, STATUSES, BUSINESS_LINES, canonicalStatus, REMINDER_OPTIONS } from '../data/initialData';
 import { requestNotificationPermission, getNotificationPermission, sendTestNotification } from '../utils/notificationService';
 import { NotificationDrawer, calculateNotificationItems } from './NotificationDrawer';
 import { ActivityLogDrawer } from './ActivityLogDrawer';
+import { KpiDashboardDrawer } from './KpiDashboardDrawer';
 
 export function LarkNavbar({
   activeView,
@@ -83,6 +85,7 @@ export function LarkNavbar({
   const [showExportMenu, setShowExportMenu] = useState(false);
   const [showNotifDrawer, setShowNotifDrawer] = useState(false);
   const [showLogDrawer, setShowLogDrawer] = useState(false);
+  const [showKpiDrawer, setShowKpiDrawer] = useState(false);
   const [notifStatus, setNotifStatus] = useState(() => getNotificationPermission());
 
   useEffect(() => {
@@ -111,12 +114,14 @@ export function LarkNavbar({
       setShowAddRecordMenu(false);
       setShowNavMenu(false);
       setShowNotifDrawer(false);
+      setShowLogDrawer(false);
+      setShowKpiDrawer(false);
     };
-    if (showSortMenu || showFilterMenu || showAddRecordMenu || showNavMenu || showNotifDrawer) {
+    if (showSortMenu || showFilterMenu || showAddRecordMenu || showNavMenu || showNotifDrawer || showLogDrawer || showKpiDrawer) {
       document.addEventListener('click', handleDocumentClick);
       return () => document.removeEventListener('click', handleDocumentClick);
     }
-  }, [showSortMenu, showFilterMenu, showAddRecordMenu, showNavMenu, showNotifDrawer]);
+  }, [showSortMenu, showFilterMenu, showAddRecordMenu, showNavMenu, showNotifDrawer, showLogDrawer, showKpiDrawer]);
 
   const views = [
     { id: 'table', label: 'Task list', icon: TableIcon },
@@ -295,6 +300,34 @@ export function LarkNavbar({
               dismissedIds={dismissedNotifIds}
               onDismissNotification={onDismissNotification}
               onDismissAllNotifications={onDismissAllNotifications}
+              onSelectRecord={onSelectRecord}
+            />
+          </div>
+
+          {/* KPI & Executive Dashboard Popover */}
+          <div className="relative">
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                setShowKpiDrawer(prev => !prev);
+              }}
+              className={`relative flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium transition cursor-pointer ${
+                showKpiDrawer
+                  ? 'bg-indigo-600 text-white shadow-xs'
+                  : 'bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 text-neutral-700 dark:text-neutral-300'
+              }`}
+              title="Buka Executive Dashboard & KPI (Kecepatan Eksekusi, Top Performer, Stale Tasks)"
+            >
+              <BarChart3 className={`w-3.5 h-3.5 ${showKpiDrawer ? 'text-white' : 'text-indigo-600 dark:text-indigo-400'}`} />
+              <span className="hidden sm:inline font-semibold">Dashboard</span>
+            </button>
+
+            {/* KPI Dashboard Drawer */}
+            <KpiDashboardDrawer
+              isOpen={showKpiDrawer}
+              onClose={() => setShowKpiDrawer(false)}
+              records={allRecords}
               onSelectRecord={onSelectRecord}
             />
           </div>
