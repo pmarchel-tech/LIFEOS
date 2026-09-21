@@ -859,6 +859,37 @@ export default function App() {
         return 0;
       }
 
+      // Update Age sorting (elapsed days since latest update)
+      if (activeSort === 'updateAge') {
+        const getAgeDays = (rec) => {
+          let dStr = null;
+          if (Array.isArray(rec.updates) && rec.updates.length > 0) {
+            dStr = rec.updates[0].date || (rec.updates[0].createdAt ? rec.updates[0].createdAt.split('T')[0] : null);
+          } else if (rec.notes && rec.notes.trim()) {
+            dStr = rec.updated_at ? rec.updated_at.split('T')[0] : (rec.dueDate || rec.startTime || null);
+          }
+          if (!dStr) return null;
+          try {
+            const parts = dStr.split('T')[0].split('-');
+            if (parts.length < 3) return null;
+            const target = new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10));
+            const now = new Date();
+            const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+            return Math.round((today.getTime() - target.getTime()) / (1000 * 60 * 60 * 24));
+          } catch (e) {
+            return null;
+          }
+        };
+        const ageA = getAgeDays(a);
+        const ageB = getAgeDays(b);
+        if (ageA === null && ageB === null) return 0;
+        if (ageA === null) return 1;
+        if (ageB === null) return -1;
+        if (ageA < ageB) return activeOrder === 'asc' ? -1 : 1;
+        if (ageA > ageB) return activeOrder === 'asc' ? 1 : -1;
+        return 0;
+      }
+
       // Priority ordering rank: P0 < P1 < P2 < P3
       if (activeSort === 'priority') {
         const priorityRank = { P0: 0, P1: 1, P2: 2, P3: 3 };

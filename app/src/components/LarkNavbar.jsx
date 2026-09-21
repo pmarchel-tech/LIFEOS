@@ -272,7 +272,13 @@ export function LarkNavbar({
               type="button"
               onClick={(e) => {
                 e.stopPropagation();
-                setShowNotifDrawer(prev => !prev);
+                setShowNotifDrawer(prev => {
+                  if (!prev) {
+                    setShowKpiDrawer(false);
+                    setShowLogDrawer(false);
+                  }
+                  return !prev;
+                });
               }}
               className={`relative flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium transition cursor-pointer ${
                 showNotifDrawer
@@ -310,7 +316,13 @@ export function LarkNavbar({
               type="button"
               onClick={(e) => {
                 e.stopPropagation();
-                setShowKpiDrawer(prev => !prev);
+                setShowKpiDrawer(prev => {
+                  if (!prev) {
+                    setShowNotifDrawer(false);
+                    setShowLogDrawer(false);
+                  }
+                  return !prev;
+                });
               }}
               className={`relative flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium transition cursor-pointer ${
                 showKpiDrawer
@@ -338,7 +350,13 @@ export function LarkNavbar({
               type="button"
               onClick={(e) => {
                 e.stopPropagation();
-                setShowLogDrawer(prev => !prev);
+                setShowLogDrawer(prev => {
+                  if (!prev) {
+                    setShowNotifDrawer(false);
+                    setShowKpiDrawer(false);
+                  }
+                  return !prev;
+                });
               }}
               className={`relative flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium transition cursor-pointer ${
                 showLogDrawer
