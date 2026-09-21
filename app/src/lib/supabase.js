@@ -166,3 +166,121 @@ export async function testSupabaseConnection(overrideKey = null) {
     return { success: false, message: err.message || 'Koneksi gagal' };
   }
 }
+
+// ─── PROJECTS ────────────────────────────────────────────────────────────────
+
+// Fetch all projects from Supabase
+export async function fetchProjectsFromSupabase() {
+  const supabase = getSupabaseClient();
+  if (!supabase) return null;
+  try {
+    const { data, error } = await supabase
+      .from('projects')
+      .select('*')
+      .order('created_at', { ascending: true });
+    if (error) { console.warn('Supabase projects fetch error:', error); return null; }
+    return data.map(row => ({ name: row.name, color: row.color }));
+  } catch (err) {
+    console.warn('Failed fetching projects:', err);
+    return null;
+  }
+}
+
+// Upsert a single project to Supabase
+export async function upsertProjectToSupabase(project) {
+  const supabase = getSupabaseClient();
+  if (!supabase || !project?.name) return false;
+  try {
+    const { error } = await supabase
+      .from('projects')
+      .upsert([{ name: project.name, color: project.color || '' }], { onConflict: 'name' });
+    if (error) { console.warn('Supabase project upsert error:', error); return false; }
+    return true;
+  } catch (err) {
+    console.warn('Failed upserting project:', err);
+    return false;
+  }
+}
+
+// Bulk upsert projects to Supabase (for seeding from localStorage)
+export async function syncProjectsToSupabase(projects) {
+  const supabase = getSupabaseClient();
+  if (!supabase || !Array.isArray(projects) || projects.length === 0) return false;
+  try {
+    const rows = projects.map(p => ({ name: p.name, color: p.color || '' }));
+    const { error } = await supabase
+      .from('projects')
+      .upsert(rows, { onConflict: 'name' });
+    if (error) { console.warn('Supabase projects sync error:', error); return false; }
+    return true;
+  } catch (err) {
+    console.warn('Failed syncing projects:', err);
+    return false;
+  }
+}
+
+// Delete a project from Supabase by name
+export async function deleteProjectFromSupabase(name) {
+  const supabase = getSupabaseClient();
+  if (!supabase || !name) return false;
+  try {
+    const { error } = await supabase.from('projects').delete().eq('name', name);
+    if (error) { console.warn('Supabase project delete error:', error); return false; }
+    return true;
+  } catch (err) {
+    console.warn('Failed deleting project:', err);
+    return false;
+  }
+}
+
+// ─── LEADERS ─────────────────────────────────────────────────────────────────
+
+// Fetch all leaders from Supabase
+export async function fetchLeadersFromSupabase() {
+  const supabase = getSupabaseClient();
+  if (!supabase) return null;
+  try {
+    const { data, error } = await supabase
+      .from('leaders')
+      .select('*')
+      .order('created_at', { ascending: true });
+    if (error) { console.warn('Supabase leaders fetch error:', error); return null; }
+    return data.map(row => ({ name: row.name, avatar: row.avatar, role: row.role, color: row.color }));
+  } catch (err) {
+    console.warn('Failed fetching leaders:', err);
+    return null;
+  }
+}
+
+// Upsert a single leader to Supabase
+export async function upsertLeaderToSupabase(leader) {
+  const supabase = getSupabaseClient();
+  if (!supabase || !leader?.name) return false;
+  try {
+    const { error } = await supabase
+      .from('leaders')
+      .upsert([{ name: leader.name, avatar: leader.avatar || '', role: leader.role || 'Member', color: leader.color || '' }], { onConflict: 'name' });
+    if (error) { console.warn('Supabase leader upsert error:', error); return false; }
+    return true;
+  } catch (err) {
+    console.warn('Failed upserting leader:', err);
+    return false;
+  }
+}
+
+// Bulk upsert leaders to Supabase (for seeding from localStorage)
+export async function syncLeadersToSupabase(leaders) {
+  const supabase = getSupabaseClient();
+  if (!supabase || !Array.isArray(leaders) || leaders.length === 0) return false;
+  try {
+    const rows = leaders.map(l => ({ name: l.name, avatar: l.avatar || '', role: l.role || 'Member', color: l.color || '' }));
+    const { error } = await supabase
+      .from('leaders')
+      .upsert(rows, { onConflict: 'name' });
+    if (error) { console.warn('Supabase leaders sync error:', error); return false; }
+    return true;
+  } catch (err) {
+    console.warn('Failed syncing leaders:', err);
+    return false;
+  }
+}

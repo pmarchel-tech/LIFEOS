@@ -17,7 +17,13 @@ import {
   fetchTasksFromSupabase,
   syncTasksToSupabase,
   upsertSingleTaskToSupabase,
-  deleteTaskFromSupabase
+  deleteTaskFromSupabase,
+  fetchProjectsFromSupabase,
+  syncProjectsToSupabase,
+  upsertProjectToSupabase,
+  fetchLeadersFromSupabase,
+  syncLeadersToSupabase,
+  upsertLeaderToSupabase
 } from './lib/supabase';
 import { exportWeeklyPlanningExcel } from './lib/exportExcel';
 import {
@@ -166,7 +172,7 @@ export default function App() {
     return defaultCats;
   });
 
-  // Dynamic projects list state with local storage persistence
+  // Dynamic projects list state — starts from localStorage, synced with Supabase
   const [projects, setProjects] = useState(() => {
     try {
       const saved = localStorage.getItem('lark_projects_v1');
@@ -189,7 +195,7 @@ export default function App() {
     return [...projects].sort((a, b) => a.name.localeCompare(b.name, undefined, { sensitivity: 'base' }));
   }, [projects]);
 
-  // Dynamic leaders/people list state with local storage persistence
+  // Dynamic leaders/people list state — starts from localStorage, synced with Supabase
   const [leaders, setLeaders] = useState(() => {
     try {
       const saved = localStorage.getItem('lark_leaders_v1');
@@ -308,7 +314,51 @@ export default function App() {
           await syncTasksToSupabase(records);
         }
 
-        // 2. Sync activity logs
+        // 2. Sync projects
+        const remoteProjects = await fetchProjectsFromSupabase();
+        if (isMounted) {
+          if (remoteProjects && remoteProjects.length > 0) {
+            // Merge: cloud is source of truth, but keep any local-only projects too
+            setProjects(prev => {
+              const cloudNames = new Set(remoteProjects.map(p => p.name.toLowerCase()));
+              const localOnly = prev.filter(p => !cloudNames.has(p.name.toLowerCase()));
+              return [...remoteProjects, ...localOnly];
+            });
+          } else if (remoteProjects && remoteProjects.length === 0) {
+            // Cloud empty — seed from local state
+            const localProjects = (() => {
+              try {
+                const saved = localStorage.getItem('lark_projects_v1');
+                if (saved) { const p = JSON.parse(saved); if (Array.isArray(p) && p.length > 0) return p; }
+              } catch (e) {}
+              return PROJECTS;
+            })();
+            await syncProjectsToSupabase(localProjects);
+          }
+        }
+
+        // 3. Sync leaders
+        const remoteLeaders = await fetchLeadersFromSupabase();
+        if (isMounted) {
+          if (remoteLeaders && remoteLeaders.length > 0) {
+            setLeaders(prev => {
+              const cloudNames = new Set(remoteLeaders.map(l => l.name.toLowerCase()));
+              const localOnly = prev.filter(l => !cloudNames.has(l.name.toLowerCase()));
+              return [...remoteLeaders, ...localOnly];
+            });
+          } else if (remoteLeaders && remoteLeaders.length === 0) {
+            const localLeaders = (() => {
+              try {
+                const saved = localStorage.getItem('lark_leaders_v1');
+                if (saved) { const l = JSON.parse(saved); if (Array.isArray(l) && l.length > 0) return l; }
+              } catch (e) {}
+              return LEADERS;
+            })();
+            await syncLeadersToSupabase(localLeaders);
+          }
+        }
+
+        // 4. Sync activity logs
         const localLogs = getLocalLogs();
         const remoteLogs = await fetchLogsFromSupabase(300);
         if (!isMounted) return;
@@ -501,21 +551,21 @@ export default function App() {
     }
   }, [categories]);
 
-  // Sync projects to localStorage
+  // Sync projects to localStorage + Supabase
   useEffect(() => {
     try {
       localStorage.setItem('lark_projects_v1', JSON.stringify(projects));
     } catch (e) {
-      console.error('Failed saving projects:', e);
+      console.error('Failed saving projects to localStorage:', e);
     }
   }, [projects]);
 
-  // Sync leaders/people to localStorage
+  // Sync leaders/people to localStorage + Supabase
   useEffect(() => {
     try {
       localStorage.setItem('lark_leaders_v1', JSON.stringify(leaders));
     } catch (e) {
-      console.error('Failed saving leaders:', e);
+      console.error('Failed saving leaders to localStorage:', e);
     }
   }, [leaders]);
 
@@ -551,6 +601,8 @@ export default function App() {
       color: colors[leaders.length % colors.length]
     };
     setLeaders(prev => [...prev, newPerson]);
+    // Sync new leader to Supabase immediately
+    upsertLeaderToSupabase(newPerson).catch(e => console.warn('Failed to sync leader to Supabase:', e));
     return clean;
   };
 
@@ -577,6 +629,8 @@ export default function App() {
       color: colors[projects.length % colors.length]
     };
     setProjects(prev => [...prev, newObj]);
+    // Sync new project to Supabase immediately
+    upsertProjectToSupabase(newObj).catch(e => console.warn('Failed to sync project to Supabase:', e));
     return clean;
   };
 
