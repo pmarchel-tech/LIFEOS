@@ -109,7 +109,9 @@ export const LEADERS = [
   { name: "Pinkan", avatar: "P", role: "Finance & Accounting", color: "bg-rose-600 text-white" },
   { name: "Ci Rina", avatar: "CR", role: "Senior Finance Advisor", color: "bg-teal-600 text-white" },
   { name: "One Brand", avatar: "OB", role: "Creative Agency", color: "bg-orange-600 text-white" },
-  { name: "dr. Teguh", avatar: "DT", role: "Clinical Psychologist", color: "bg-blue-600 text-white" }
+  { name: "dr. Teguh", avatar: "DT", role: "Clinical Psychologist", color: "bg-blue-600 text-white" },
+  { name: "FACHRUL", avatar: "F", role: "Member", color: "bg-indigo-600 text-white" },
+  { name: "PETER", avatar: "P", role: "Member", color: "bg-emerald-600 text-white" }
 ];
 
 export const BUSINESS_LINES = [
@@ -127,18 +129,23 @@ export const BUSINESS_LINES = [
 ];
 
 export const PROJECTS = [
+  { name: "ALPHALUX", color: "bg-blue-500/15 text-blue-700 dark:text-blue-300 border-blue-300 dark:border-blue-800" },
+  { name: "BALA KESELAMATAN", color: "bg-purple-500/15 text-purple-700 dark:text-purple-300 border-purple-300 dark:border-purple-800" },
   { name: "BETTER FUTURE", color: "bg-purple-500/15 text-purple-700 dark:text-purple-300 border-purple-300 dark:border-purple-800" },
-  { name: "UID", color: "bg-blue-500/15 text-blue-700 dark:text-blue-300 border-blue-300 dark:border-blue-800" },
-  { name: "OPTY", color: "bg-amber-500/15 text-amber-700 dark:text-amber-300 border-amber-300 dark:border-amber-800" },
-  { name: "SKK MEDAN", color: "bg-sky-500/15 text-sky-700 dark:text-sky-300 border-sky-300 dark:border-sky-800" },
-  { name: "SKK PEMATANG SIANTAR", color: "bg-indigo-500/15 text-indigo-700 dark:text-indigo-300 border-indigo-300 dark:border-indigo-800" },
-  { name: "REC", color: "bg-rose-500/15 text-rose-700 dark:text-rose-300 border-rose-300 dark:border-rose-800" },
-  { name: "MTA", color: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border-emerald-300 dark:border-emerald-800" },
   { name: "DMA", color: "bg-cyan-500/15 text-cyan-700 dark:text-cyan-300 border-cyan-300 dark:border-cyan-800" },
   { name: "HANA MULIA", color: "bg-pink-500/15 text-pink-700 dark:text-pink-300 border-pink-300 dark:border-pink-800" },
-  { name: "PETRA", color: "bg-purple-500/15 text-purple-700 dark:text-purple-300 border-purple-300 dark:border-purple-800" },
+  { name: "KETAPANG", color: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border-emerald-300 dark:border-emerald-800" },
+  { name: "LIFE OS", color: "bg-amber-500/15 text-amber-700 dark:text-amber-300 border-amber-300 dark:border-amber-800" },
   { name: "LPK OS", color: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border-emerald-300 dark:border-emerald-800" },
-  { name: "LIFE OS", color: "bg-amber-500/15 text-amber-700 dark:text-amber-300 border-amber-300 dark:border-amber-800" }
+  { name: "MTA", color: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border-emerald-300 dark:border-emerald-800" },
+  { name: "ONE BRAND", color: "bg-orange-500/15 text-orange-700 dark:text-orange-300 border-orange-300 dark:border-orange-800" },
+  { name: "OPTY", color: "bg-amber-500/15 text-amber-700 dark:text-amber-300 border-amber-300 dark:border-amber-800" },
+  { name: "PETRA", color: "bg-purple-500/15 text-purple-700 dark:text-purple-300 border-purple-300 dark:border-purple-800" },
+  { name: "REC", color: "bg-rose-500/15 text-rose-700 dark:text-rose-300 border-rose-300 dark:border-rose-800" },
+  { name: "SKK MEDAN", color: "bg-sky-500/15 text-sky-700 dark:text-sky-300 border-sky-300 dark:border-sky-800" },
+  { name: "SKK PEMATANG SIANTAR", color: "bg-indigo-500/15 text-indigo-700 dark:text-indigo-300 border-indigo-300 dark:border-indigo-800" },
+  { name: "UID", color: "bg-blue-500/15 text-blue-700 dark:text-blue-300 border-blue-300 dark:border-blue-800" },
+  { name: "YKKI", color: "bg-teal-500/15 text-teal-700 dark:text-teal-300 border-teal-300 dark:border-teal-800" }
 ];
 
 export const PRIORITIES = {
