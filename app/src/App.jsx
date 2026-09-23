@@ -172,10 +172,10 @@ export default function App() {
     return defaultCats;
   });
 
-  // Dynamic projects list state — starts from localStorage, synced with Supabase
+  // Dynamic projects list state — starts from localStorage v2, fallback to PROJECTS (17 items)
   const [projects, setProjects] = useState(() => {
     try {
-      const saved = localStorage.getItem('lark_projects_v1');
+      const saved = localStorage.getItem('lark_projects_v2');
       if (saved) {
         const parsed = JSON.parse(saved);
         if (Array.isArray(parsed) && parsed.length > 0) {
@@ -195,10 +195,10 @@ export default function App() {
     return [...projects].sort((a, b) => a.name.localeCompare(b.name, undefined, { sensitivity: 'base' }));
   }, [projects]);
 
-  // Dynamic leaders/people list state — starts from localStorage, synced with Supabase
+  // Dynamic leaders/people list state — starts from localStorage v2, fallback to LEADERS
   const [leaders, setLeaders] = useState(() => {
     try {
-      const saved = localStorage.getItem('lark_leaders_v1');
+      const saved = localStorage.getItem('lark_leaders_v2');
       if (saved) {
         const parsed = JSON.parse(saved);
         if (Array.isArray(parsed) && parsed.length > 0) {
@@ -302,53 +302,36 @@ export default function App() {
     let isMounted = true;
     const initCloudSync = async () => {
       try {
-        // 1. Sync tasks
-        const remoteTasks = await fetchTasksFromSupabase();
+        // Run sync tasks in parallel so projects and leaders are not blocked
+        const [remoteTasksRes, remoteProjectsRes, remoteLeadersRes] = await Promise.allSettled([
+          fetchTasksFromSupabase(),
+          fetchProjectsFromSupabase(),
+          fetchLeadersFromSupabase()
+        ]);
+
         if (!isMounted) return;
 
-        if (remoteTasks && remoteTasks.length > 0) {
-          // Cloud has tasks, hydrate local records
-          setRecords(remoteTasks);
-        } else if (remoteTasks && remoteTasks.length === 0 && records.length > 0) {
-          // Cloud table is empty, auto-seed with current records!
+        // 1. Sync projects
+        if (remoteProjectsRes.status === 'fulfilled' && remoteProjectsRes.value && remoteProjectsRes.value.length > 0) {
+          setProjects(remoteProjectsRes.value);
+        } else if (remoteProjectsRes.status === 'fulfilled' && remoteProjectsRes.value && remoteProjectsRes.value.length === 0) {
+          await syncProjectsToSupabase(PROJECTS);
+          setProjects(PROJECTS);
+        }
+
+        // 2. Sync leaders
+        if (remoteLeadersRes.status === 'fulfilled' && remoteLeadersRes.value && remoteLeadersRes.value.length > 0) {
+          setLeaders(remoteLeadersRes.value);
+        } else if (remoteLeadersRes.status === 'fulfilled' && remoteLeadersRes.value && remoteLeadersRes.value.length === 0) {
+          await syncLeadersToSupabase(LEADERS);
+          setLeaders(LEADERS);
+        }
+
+        // 3. Sync tasks
+        if (remoteTasksRes.status === 'fulfilled' && remoteTasksRes.value && remoteTasksRes.value.length > 0) {
+          setRecords(remoteTasksRes.value);
+        } else if (remoteTasksRes.status === 'fulfilled' && remoteTasksRes.value && remoteTasksRes.value.length === 0 && records.length > 0) {
           await syncTasksToSupabase(records);
-        }
-
-        // 2. Sync projects
-        const remoteProjects = await fetchProjectsFromSupabase();
-        if (isMounted) {
-          if (remoteProjects && remoteProjects.length > 0) {
-            // Cloud is the SINGLE source of truth — replace local state entirely
-            setProjects(remoteProjects);
-          } else if (remoteProjects && remoteProjects.length === 0) {
-            // Cloud empty — seed from local state
-            const localProjects = (() => {
-              try {
-                const saved = localStorage.getItem('lark_projects_v1');
-                if (saved) { const p = JSON.parse(saved); if (Array.isArray(p) && p.length > 0) return p; }
-              } catch (e) {}
-              return PROJECTS;
-            })();
-            await syncProjectsToSupabase(localProjects);
-          }
-        }
-
-        // 3. Sync leaders
-        const remoteLeaders = await fetchLeadersFromSupabase();
-        if (isMounted) {
-          if (remoteLeaders && remoteLeaders.length > 0) {
-            // Cloud is the SINGLE source of truth — replace local state entirely
-            setLeaders(remoteLeaders);
-          } else if (remoteLeaders && remoteLeaders.length === 0) {
-            const localLeaders = (() => {
-              try {
-                const saved = localStorage.getItem('lark_leaders_v1');
-                if (saved) { const l = JSON.parse(saved); if (Array.isArray(l) && l.length > 0) return l; }
-              } catch (e) {}
-              return LEADERS;
-            })();
-            await syncLeadersToSupabase(localLeaders);
-          }
         }
 
         // 4. Sync activity logs
@@ -547,7 +530,7 @@ export default function App() {
   // Sync projects to localStorage + Supabase
   useEffect(() => {
     try {
-      localStorage.setItem('lark_projects_v1', JSON.stringify(projects));
+      localStorage.setItem('lark_projects_v2', JSON.stringify(projects));
     } catch (e) {
       console.error('Failed saving projects to localStorage:', e);
     }
@@ -556,7 +539,7 @@ export default function App() {
   // Sync leaders/people to localStorage + Supabase
   useEffect(() => {
     try {
-      localStorage.setItem('lark_leaders_v1', JSON.stringify(leaders));
+      localStorage.setItem('lark_leaders_v2', JSON.stringify(leaders));
     } catch (e) {
       console.error('Failed saving leaders to localStorage:', e);
     }
