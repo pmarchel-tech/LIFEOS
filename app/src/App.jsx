@@ -318,12 +318,8 @@ export default function App() {
         const remoteProjects = await fetchProjectsFromSupabase();
         if (isMounted) {
           if (remoteProjects && remoteProjects.length > 0) {
-            // Merge: cloud is source of truth, but keep any local-only projects too
-            setProjects(prev => {
-              const cloudNames = new Set(remoteProjects.map(p => p.name.toLowerCase()));
-              const localOnly = prev.filter(p => !cloudNames.has(p.name.toLowerCase()));
-              return [...remoteProjects, ...localOnly];
-            });
+            // Cloud is the SINGLE source of truth — replace local state entirely
+            setProjects(remoteProjects);
           } else if (remoteProjects && remoteProjects.length === 0) {
             // Cloud empty — seed from local state
             const localProjects = (() => {
@@ -341,11 +337,8 @@ export default function App() {
         const remoteLeaders = await fetchLeadersFromSupabase();
         if (isMounted) {
           if (remoteLeaders && remoteLeaders.length > 0) {
-            setLeaders(prev => {
-              const cloudNames = new Set(remoteLeaders.map(l => l.name.toLowerCase()));
-              const localOnly = prev.filter(l => !cloudNames.has(l.name.toLowerCase()));
-              return [...remoteLeaders, ...localOnly];
-            });
+            // Cloud is the SINGLE source of truth — replace local state entirely
+            setLeaders(remoteLeaders);
           } else if (remoteLeaders && remoteLeaders.length === 0) {
             const localLeaders = (() => {
               try {
