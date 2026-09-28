@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   Layers,
   ArrowUpDown,
@@ -88,9 +88,33 @@ export function LarkNavbar({
   const [showKpiDrawer, setShowKpiDrawer] = useState(false);
   const [notifStatus, setNotifStatus] = useState(() => getNotificationPermission());
 
+  const searchInputRef = useRef(null);
+
+  // Shortcut Alt + C to immediately focus search box (from Task List or any view)
   useEffect(() => {
-    setNotifStatus(getNotificationPermission());
-  }, []);
+    const handleKeyDown = (e) => {
+      const isAltC = e.altKey && !e.ctrlKey && !e.metaKey && (e.key === 'c' || e.key === 'C' || e.code === 'KeyC');
+      if (isAltC) {
+        e.preventDefault();
+
+        // If not in task list, optionally switch to table view
+        if (activeView !== 'table' && typeof setActiveView === 'function') {
+          setActiveView('table');
+        }
+
+        // Focus and select the search text
+        setTimeout(() => {
+          if (searchInputRef.current) {
+            searchInputRef.current.focus();
+            searchInputRef.current.select();
+          }
+        }, 20);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [activeView, setActiveView]);
 
   const handleRequestNotif = async () => {
     const res = await requestNotificationPermission();
@@ -598,18 +622,36 @@ export function LarkNavbar({
           <div className="relative flex items-center">
             <Search className="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400 pointer-events-none" />
             <input
+              ref={searchInputRef}
               type="text"
               placeholder="Search..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-9 pr-7 py-1.5 bg-neutral-200/60 dark:bg-white/10 hover:bg-neutral-200 dark:hover:bg-white/15 border border-black/5 dark:border-white/10 rounded-xl text-xs text-neutral-900 dark:text-white placeholder-neutral-500 focus:outline-none focus:bg-white dark:focus:bg-[#252528] focus:border-apple-blue focus:ring-2 focus:ring-apple-blue/30 w-36 sm:w-52 transition-all shadow-inner"
+              onKeyDown={(e) => {
+                if (e.key === 'Escape') {
+                  if (searchQuery) {
+                    setSearchQuery('');
+                  } else {
+                    e.currentTarget.blur();
+                  }
+                }
+              }}
+              title="Cari task / project / leader (Shortcut: Alt + C)"
+              className="pl-9 pr-14 py-1.5 bg-neutral-200/60 dark:bg-white/10 hover:bg-neutral-200 dark:hover:bg-white/15 border border-black/5 dark:border-white/10 rounded-xl text-xs text-neutral-900 dark:text-white placeholder-neutral-500 focus:outline-none focus:bg-white dark:focus:bg-[#252528] focus:border-apple-blue focus:ring-2 focus:ring-apple-blue/30 w-36 sm:w-56 transition-all shadow-inner"
             />
+            {!searchQuery && (
+              <div className="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none hidden sm:flex items-center">
+                <kbd className="text-[10px] text-neutral-500 dark:text-neutral-400 bg-black/5 dark:bg-white/10 px-1.5 py-0.5 rounded font-mono font-medium border border-black/10 dark:border-white/10 shadow-xs">
+                  Alt+C
+                </kbd>
+              </div>
+            )}
             {searchQuery && (
               <button
                 type="button"
                 onClick={() => setSearchQuery('')}
                 className="absolute right-2.5 top-1/2 -translate-y-1/2 p-0.5 rounded-full hover:bg-neutral-300 dark:hover:bg-neutral-700 text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-200 transition cursor-pointer"
-                title="Reset pencarian"
+                title="Reset pencarian (Esc)"
                 aria-label="Reset search"
               >
                 <X className="w-3.5 h-3.5" />
