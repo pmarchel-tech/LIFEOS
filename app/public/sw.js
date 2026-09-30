@@ -1,10 +1,71 @@
-// Life OS Service Worker for Mobile PWA & Push Notifications
+// Life OS Service Worker for Mobile PWA, Instant Caching & Push Notifications
+const CACHE_NAME = 'life-os-cache-v2';
+
 self.addEventListener('install', (event) => {
   self.skipWaiting();
 });
 
 self.addEventListener('activate', (event) => {
-  event.waitUntil(self.clients.claim());
+  event.waitUntil(
+    caches.keys().then((keys) =>
+      Promise.all(
+        keys.map((key) => {
+          if (key !== CACHE_NAME) return caches.delete(key);
+        })
+      )
+    ).then(() => self.clients.claim())
+  );
+});
+
+// Cache strategy: Cache-first for hashed static assets, Network-first for app shell
+self.addEventListener('fetch', (event) => {
+  const { request } = event;
+  const url = new URL(request.url);
+
+  // Only handle same-origin GET requests
+  if (request.method !== 'GET' || url.origin !== location.origin) return;
+
+  // Supabase or external API requests: do not intercept in service worker
+  if (url.pathname.startsWith('/api') || url.hostname.includes('supabase')) return;
+
+  // Static hashed assets & media: Cache-first with background update
+  if (url.pathname.startsWith('/assets/') || url.pathname.endsWith('.png') || url.pathname.endsWith('.svg') || url.pathname.endsWith('.json')) {
+    event.respondWith(
+      caches.open(CACHE_NAME).then(async (cache) => {
+        const cached = await cache.match(request);
+        if (cached) return cached;
+        try {
+          const response = await fetch(request);
+          if (response.status === 200) {
+            cache.put(request, response.clone());
+          }
+          return response;
+        } catch (e) {
+          return cached;
+        }
+      })
+    );
+    return;
+  }
+
+  // HTML / App shell: Network-first (get latest deployed version) with cache fallback
+  if (request.mode === 'navigate' || url.pathname === '/' || url.pathname === '/index.html') {
+    event.respondWith(
+      fetch(request)
+        .then((response) => {
+          if (response.status === 200) {
+            const copy = response.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(request, copy));
+          }
+          return response;
+        })
+        .catch(async () => {
+          const cached = await caches.match(request);
+          if (cached) return cached;
+          return caches.match('/');
+        })
+    );
+  }
 });
 
 // Listen for messages from client app to display local notifications on mobile/desktop
@@ -41,3 +102,4 @@ self.addEventListener('notificationclick', (event) => {
     })
   );
 });
+

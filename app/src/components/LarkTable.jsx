@@ -543,7 +543,7 @@ export function LarkTable({
   };
 
   return (
-    <div className="overflow-x-auto bg-white/80 dark:bg-[#1c1c1e]/80 backdrop-blur-xl border border-black/5 dark:border-white/10 rounded-2xl shadow-[0_4px_16px_rgba(0,0,0,0.03)] transition-colors">
+    <div className="overflow-x-auto bg-white dark:bg-[#1c1c1e] border border-black/5 dark:border-white/10 rounded-2xl shadow-[0_4px_16px_rgba(0,0,0,0.03)] transition-colors">
       <table className="w-full text-left text-xs border-collapse table-fixed">
         
         {/* Table Header Columns (macOS Table View Header) */}

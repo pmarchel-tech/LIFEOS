@@ -1,4 +1,3 @@
-import XLSX from 'xlsx-js-style';
 import { canonicalStatus } from '../data/initialData';
 
 // Helper: Format date string YYYY-MM-DD to "Sep-14" format (matching user table cells)
@@ -205,7 +204,7 @@ export const computeWeeklyPlanningData = (records, mondayInput) => {
  * Main export function: generates a high-fidelity Excel (.xlsx) file
  * with formatting matching the Weekly Planning report screen display.
  */
-export function exportWeeklyPlanningExcel({
+export async function exportWeeklyPlanningExcel({
   records = [],
   groupedByLeader: providedGrouped,
   currentMonday: providedMonday,
@@ -213,6 +212,9 @@ export function exportWeeklyPlanningExcel({
   periodStr: providedPeriod,
   filenameOverride
 }) {
+  const xlsxModule = await import('xlsx-js-style');
+  const XLSX = xlsxModule.default || xlsxModule;
+
   let groupedByLeader = providedGrouped;
   let currentMonday = providedMonday;
   let currentSunday = providedSunday;
