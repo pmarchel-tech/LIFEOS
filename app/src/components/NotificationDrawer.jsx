@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import {
   Bell,
   BellOff,
@@ -14,6 +14,7 @@ import {
   ArrowUpDown
 } from 'lucide-react';
 import { canonicalStatus, REMINDER_OPTIONS, PRIORITIES } from '../data/initialData';
+import { requestNotificationPermission, getNotificationPermission, sendTestNotification } from '../utils/notificationService';
 
 const getPriorityRank = (p) => {
   if (!p) return 4;
@@ -165,6 +166,27 @@ export function NotificationDrawer({
   onSelectRecord
 }) {
   const [sortOption, setSortOption] = useState('date_desc');
+  const [notifPermission, setNotifPermission] = useState(() => getNotificationPermission());
+
+  useEffect(() => {
+    if (isOpen) {
+      setNotifPermission(getNotificationPermission());
+    }
+  }, [isOpen]);
+
+  const handleEnableNotification = async () => {
+    const res = await requestNotificationPermission();
+    setNotifPermission(res);
+    if (res === 'granted') {
+      await sendTestNotification();
+    } else if (res === 'denied') {
+      alert('Izin notifikasi diblokir di browser. Klik ikon pengaturan situs/gembok di sebelah URL browser dan pilih "Izinkan / Allow" untuk Notifikasi.');
+    }
+  };
+
+  const handleTestNotification = async () => {
+    await sendTestNotification();
+  };
 
   // Compute Active Notifications from Records using unified function
   const { reminderItems, dueTodayItems, overdueItems, totalUnread } = useMemo(() => {
@@ -212,6 +234,39 @@ export function NotificationDrawer({
             <X className="w-3.5 h-3.5" />
           </button>
         </div>
+      </div>
+
+      {/* Device Notification Status & Test Bar */}
+      <div className="px-3.5 py-2 bg-amber-500/10 dark:bg-amber-500/15 border-b border-amber-500/20 flex items-center justify-between text-[11px]">
+        {notifPermission === 'granted' ? (
+          <>
+            <span className="flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400 font-semibold">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              Notifikasi HP & Browser Aktif
+            </span>
+            <button
+              type="button"
+              onClick={handleTestNotification}
+              className="px-2 py-0.5 rounded-md bg-white dark:bg-neutral-800 text-amber-700 dark:text-amber-300 font-semibold border border-amber-500/30 hover:bg-amber-100 dark:hover:bg-neutral-700 transition cursor-pointer shadow-2xs"
+            >
+              🔔 Tes Bunyi & Getar
+            </button>
+          </>
+        ) : (
+          <>
+            <span className="flex items-center gap-1.5 text-amber-700 dark:text-amber-300 font-medium">
+              <AlertCircle className="w-3.5 h-3.5 text-amber-500 shrink-0" />
+              Izin Notifikasi HP Belum Aktif
+            </span>
+            <button
+              type="button"
+              onClick={handleEnableNotification}
+              className="px-2 py-0.5 rounded-md bg-amber-500 hover:bg-amber-600 text-white font-bold transition cursor-pointer shadow-xs active:scale-95"
+            >
+              Aktifkan Sekarang
+            </button>
+          </>
+        )}
       </div>
 
       {/* Sort Filter Bar */}

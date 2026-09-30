@@ -65,13 +65,13 @@ export function playReminderChime() {
 }
 
 /**
- * Trigger an OS / Browser / Windows Action Center notification for a reminder task
+ * Trigger an OS / Browser / Mobile PWA notification for a reminder task
  */
-export function sendTaskNotification(task) {
+export async function sendTaskNotification(task) {
   playReminderChime();
 
   if (!('Notification' in window)) {
-    console.warn('Browser does not support desktop notifications.');
+    console.warn('Browser does not support notifications.');
     return null;
   }
 
@@ -84,16 +84,32 @@ export function sendTaskNotification(task) {
   const scheduledTime = task.reminderTime || task.dueTime || '09:00';
   const bodyText = `Jatuh tempo: ${task.dueDate || 'Hari ini'} pukul ${scheduledTime} | ${task.taskLeader || 'Pierre Marchel'} (${task.priority || 'P1'})`;
 
-  // Options optimized for Windows Action Center / Chrome Toast
+  // Options optimized for Mobile Android/iOS PWA & Desktop
   const options = {
     body: bodyText,
     icon: 'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⏰</text></svg>',
+    badge: 'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⏰</text></svg>',
     tag: `task-reminder-${task.id || Date.now()}`,
     renotify: true,
     requireInteraction: true,
-    silent: false
+    vibrate: [200, 100, 200, 100, 200],
+    data: { url: '/' }
   };
 
+  // 1. Try Service Worker first (REQUIRED for mobile Android Chrome & iOS Safari PWA)
+  if ('serviceWorker' in navigator) {
+    try {
+      const reg = await navigator.serviceWorker.ready;
+      if (reg && reg.showNotification) {
+        await reg.showNotification(title, options);
+        return true;
+      }
+    } catch (swErr) {
+      console.warn('Service Worker showNotification error, falling back to Notification constructor:', swErr);
+    }
+  }
+
+  // 2. Desktop Notification fallback
   try {
     const notification = new Notification(title, options);
     notification.onclick = () => {
@@ -102,18 +118,18 @@ export function sendTaskNotification(task) {
     };
     return notification;
   } catch (err) {
-    console.error('Failed to create Windows notification:', err);
+    console.error('Failed to create browser notification:', err);
     return null;
   }
 }
 
 /**
- * Send a test Windows notification immediately
+ * Send a test notification immediately (Mobile PWA & Desktop)
  */
-export function sendTestNotification() {
-  return sendTaskNotification({
-    id: 'test-reminder',
-    task: 'Uji Coba Notifikasi Windows & Chrome Berhasil!',
+export async function sendTestNotification() {
+  return await sendTaskNotification({
+    id: 'test-reminder-' + Date.now(),
+    task: 'Uji Coba Notifikasi HP & Desktop Berhasil! 🔔',
     dueDate: new Date().toISOString().split('T')[0],
     dueTime: 'Sekarang',
     reminderTime: 'Sekarang',
@@ -121,3 +137,4 @@ export function sendTestNotification() {
     priority: 'P1'
   });
 }
+

@@ -295,6 +295,75 @@ export default function App() {
     }
   }, [isDarkMode]);
 
+  // Background Reminder Checker for Mobile PWA & Desktop Push Notifications
+  useEffect(() => {
+    if (!('Notification' in window) || Notification.permission !== 'granted') return;
+
+    const checkReminders = () => {
+      const now = new Date();
+      const currentYear = now.getFullYear();
+      const currentMonth = String(now.getMonth() + 1).padStart(2, '0');
+      const currentDay = String(now.getDate()).padStart(2, '0');
+      const todayStr = `${currentYear}-${currentMonth}-${currentDay}`;
+
+      const currentHour = String(now.getHours()).padStart(2, '0');
+      const currentMinute = String(now.getMinutes()).padStart(2, '0');
+      const currentTimeStr = `${currentHour}:${currentMinute}`;
+
+      records.forEach(rec => {
+        const status = canonicalStatus(rec.status);
+        if (status === 'Done' || status === 'Archived' || status === 'Cancel') return;
+
+        const taskDate = rec.dueDate || rec.startTime;
+        if (!taskDate) return;
+
+        let shouldRemind = false;
+        let scheduledTime = rec.reminderTime || rec.dueTime || '09:00';
+
+        if (rec.reminder && rec.reminder !== 'NONE') {
+          const opt = REMINDER_OPTIONS.find(o => o.id === rec.reminder);
+          const daysBefore = opt && typeof opt.daysBefore === 'number' ? opt.daysBefore : 0;
+          
+          const parts = String(taskDate).split(/[-/]/);
+          if (parts.length >= 3) {
+            const dueObj = new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10));
+            dueObj.setDate(dueObj.getDate() - daysBefore);
+            const targetDateStr = `${dueObj.getFullYear()}-${String(dueObj.getMonth() + 1).padStart(2, '0')}-${String(dueObj.getDate()).padStart(2, '0')}`;
+            
+            if (targetDateStr === todayStr) {
+              shouldRemind = true;
+            }
+          }
+        } else if (taskDate === todayStr) {
+          shouldRemind = true;
+          scheduledTime = rec.dueTime || '09:00';
+        }
+
+        if (shouldRemind) {
+          const timeParts = String(scheduledTime).split(':');
+          const schedH = (timeParts[0] || '09').padStart(2, '0');
+          const schedM = (timeParts[1] || '00').padStart(2, '0');
+          const targetTimeStr = `${schedH}:${schedM}`;
+
+          // Check if current time has reached or passed target time
+          if (currentTimeStr >= targetTimeStr) {
+            const notifKey = `life_os_notified_${rec.id}_${todayStr}_${targetTimeStr}`;
+            try {
+              if (!localStorage.getItem(notifKey)) {
+                localStorage.setItem(notifKey, 'true');
+                sendTaskNotification(rec);
+              }
+            } catch (e) {}
+          }
+        }
+      });
+    };
+
+    checkReminders();
+    const intervalId = setInterval(checkReminders, 15000);
+    return () => clearInterval(intervalId);
+  }, [records]);
+
   // Supabase Realtime & Initial Cloud Fetch Sync
   useEffect(() => {
     if (!isSupabaseConfigured()) return;
