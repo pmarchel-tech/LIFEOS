@@ -182,6 +182,54 @@ export function NotionSidePeek({
     }
   };
 
+  // Open Google Calendar event creation prefilled with task title, update text, due date at 09:00 AM, and 1-day reminder
+  const handleOpenGoogleCalendar = (item) => {
+    if (!record) return;
+
+    // 1. Title = Title Task
+    const title = record.task || 'Task Reminder';
+
+    // 2. Date = Due Date (fallback to item.date or today)
+    const rawDate = record.dueDate || item?.date || getTodayStr();
+    let dateStr = '';
+    const match = String(rawDate).match(/^(\d{4})[-/](\d{1,2})[-/](\d{1,2})/);
+    if (match) {
+      dateStr = `${match[1]}${match[2].padStart(2, '0')}${match[3].padStart(2, '0')}`;
+    } else {
+      const d = new Date(rawDate);
+      if (!isNaN(d.getTime())) {
+        dateStr = `${d.getFullYear()}${String(d.getMonth() + 1).padStart(2, '0')}${String(d.getDate()).padStart(2, '0')}`;
+      } else {
+        const today = new Date();
+        dateStr = `${today.getFullYear()}${String(today.getMonth() + 1).padStart(2, '0')}${String(today.getDate()).padStart(2, '0')}`;
+      }
+    }
+
+    // 3. Time = Default 09:00 AM (09:00 to 10:00)
+    const startDateTime = `${dateStr}T090000`;
+    const endDateTime = `${dateStr}T100000`;
+
+    // 4. Description = Update yang dilakukan + Reminder note
+    const updateContent = item?.text || '';
+    const details = [
+      `Update:\n${updateContent}`,
+      `---------------------------------`,
+      `Task: ${record.task || ''}`,
+      `Project: ${record.project || '-'}`,
+      `Leader: ${record.taskLeader || '-'}`,
+      `Due Date: ${record.dueDate || dateStr} (09:00 AM)`,
+      `🔔 Reminder Notification: 1 hari sebelum due date (1 day before)`
+    ].join('\n\n');
+
+    // Local user timezone
+    const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || 'Asia/Jakarta';
+
+    // Build Google Calendar template URL
+    const gCalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${startDateTime}/${endDateTime}&details=${encodeURIComponent(details)}&ctz=${encodeURIComponent(timeZone)}`;
+
+    window.open(gCalUrl, '_blank', 'noopener,noreferrer');
+  };
+
   // Keyboard shortcut: Alt + S (or Ctrl/Cmd + Enter) to save update
   useEffect(() => {
     if (!isOpen || !record) return;
@@ -781,20 +829,35 @@ export function NotionSidePeek({
                           <span>{item.date || 'No Date'}</span>
                         </div>
 
-                        {/* Action buttons: Edit & Delete */}
+                        {/* Action buttons: Edit, G-Cal & Delete */}
                         {!isEditingThis && (
-                          <div className="flex items-center gap-1 opacity-80 group-hover/hist:opacity-100 transition">
-                            <span className="text-[11px] font-medium text-slate-400 group-hover/hist:text-blue-500 flex items-center gap-1 transition mr-1">
+                          <div className="flex items-center gap-1.5 opacity-80 group-hover/hist:opacity-100 transition">
+                            <span className="text-[11px] font-medium text-slate-400 group-hover/hist:text-blue-500 flex items-center gap-1 transition mr-0.5">
                               <Edit2 className="w-3 h-3" />
                               <span>Klik untuk edit</span>
                             </span>
+
+                            {/* G-Cal Button */}
+                            <button
+                              type="button"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleOpenGoogleCalendar(item);
+                              }}
+                              className="px-2 py-0.5 rounded-md bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-[11px] font-semibold flex items-center gap-1 border border-emerald-500/20 hover:border-emerald-500/40 transition cursor-pointer shadow-2xs hover:scale-105 active:scale-95"
+                              title="Buka Google Calendar (Due Date, 09:00 AM, reminder 1 hari sebelumnya)"
+                            >
+                              <Calendar className="w-3 h-3 text-emerald-500" />
+                              <span>G-Cal</span>
+                            </button>
+
                             <button
                               type="button"
                               onClick={(e) => {
                                 e.stopPropagation();
                                 handleDeleteUpdate(item.id);
                               }}
-                              className="px-2 py-1 rounded hover:bg-rose-50 dark:hover:bg-rose-950/40 text-slate-400 hover:text-rose-600 text-[11px] font-semibold flex items-center gap-1 transition cursor-pointer"
+                              className="px-2 py-0.5 rounded hover:bg-rose-50 dark:hover:bg-rose-950/40 text-slate-400 hover:text-rose-600 text-[11px] font-semibold flex items-center gap-1 transition cursor-pointer"
                               title="Hapus update ini"
                             >
                               <Trash2 className="w-3 h-3" />
