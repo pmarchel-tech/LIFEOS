@@ -182,7 +182,7 @@ export function NotionSidePeek({
     }
   };
 
-  // Open Google Calendar event creation prefilled with task title, update text, due date at 09:00 AM, and 1-day reminder
+  // Open Google Calendar event creation prefilled with task title, update text, and due date (all-day event, no time/notification)
   const handleOpenGoogleCalendar = (item) => {
     if (!record) return;
 
@@ -191,25 +191,33 @@ export function NotionSidePeek({
 
     // 2. Date = Due Date (fallback to item.date or today)
     const rawDate = record.dueDate || item?.date || getTodayStr();
-    let dateStr = '';
+    let startDateStr = '';
+    let endDateStr = '';
+
     const match = String(rawDate).match(/^(\d{4})[-/](\d{1,2})[-/](\d{1,2})/);
     if (match) {
-      dateStr = `${match[1]}${match[2].padStart(2, '0')}${match[3].padStart(2, '0')}`;
+      const y = parseInt(match[1], 10);
+      const m = parseInt(match[2], 10) - 1;
+      const d = parseInt(match[3], 10);
+      const dt = new Date(y, m, d);
+      startDateStr = `${dt.getFullYear()}${String(dt.getMonth() + 1).padStart(2, '0')}${String(dt.getDate()).padStart(2, '0')}`;
+      const nextDt = new Date(y, m, d + 1);
+      endDateStr = `${nextDt.getFullYear()}${String(nextDt.getMonth() + 1).padStart(2, '0')}${String(nextDt.getDate()).padStart(2, '0')}`;
     } else {
       const d = new Date(rawDate);
       if (!isNaN(d.getTime())) {
-        dateStr = `${d.getFullYear()}${String(d.getMonth() + 1).padStart(2, '0')}${String(d.getDate()).padStart(2, '0')}`;
+        startDateStr = `${d.getFullYear()}${String(d.getMonth() + 1).padStart(2, '0')}${String(d.getDate()).padStart(2, '0')}`;
+        const nextDt = new Date(d.getFullYear(), d.getMonth(), d.getDate() + 1);
+        endDateStr = `${nextDt.getFullYear()}${String(nextDt.getMonth() + 1).padStart(2, '0')}${String(nextDt.getDate()).padStart(2, '0')}`;
       } else {
         const today = new Date();
-        dateStr = `${today.getFullYear()}${String(today.getMonth() + 1).padStart(2, '0')}${String(today.getDate()).padStart(2, '0')}`;
+        startDateStr = `${today.getFullYear()}${String(today.getMonth() + 1).padStart(2, '0')}${String(today.getDate()).padStart(2, '0')}`;
+        const nextDt = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1);
+        endDateStr = `${nextDt.getFullYear()}${String(nextDt.getMonth() + 1).padStart(2, '0')}${String(nextDt.getDate()).padStart(2, '0')}`;
       }
     }
 
-    // 3. Time = Default 09:00 AM (09:00 to 10:00)
-    const startDateTime = `${dateStr}T090000`;
-    const endDateTime = `${dateStr}T100000`;
-
-    // 4. Description = Update yang dilakukan + Reminder note
+    // 3. Description = Update yang dilakukan + detail task (tanpa time / notification)
     const updateContent = item?.text || '';
     const details = [
       `Update:\n${updateContent}`,
@@ -217,15 +225,11 @@ export function NotionSidePeek({
       `Task: ${record.task || ''}`,
       `Project: ${record.project || '-'}`,
       `Leader: ${record.taskLeader || '-'}`,
-      `Due Date: ${record.dueDate || dateStr} (09:00 AM)`,
-      `🔔 Reminder Notification: 1 hari sebelum due date (1 day before)`
-    ].join('\n\n');
+      `Due Date: ${record.dueDate || rawDate}`
+    ].filter(Boolean).join('\n\n');
 
-    // Local user timezone
-    const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || 'Asia/Jakarta';
-
-    // Build Google Calendar template URL
-    const gCalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${startDateTime}/${endDateTime}&details=${encodeURIComponent(details)}&ctz=${encodeURIComponent(timeZone)}`;
+    // Build Google Calendar template URL for clean all-day event
+    const gCalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${startDateStr}/${endDateStr}&details=${encodeURIComponent(details)}`;
 
     window.open(gCalUrl, '_blank', 'noopener,noreferrer');
   };

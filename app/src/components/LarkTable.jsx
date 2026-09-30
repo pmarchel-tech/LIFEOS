@@ -30,6 +30,19 @@ import { PRIORITIES, STATUSES, PROJECTS, LEADERS, getStatusConfig, canonicalStat
 
 const MONTH_NAMES = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
+const formatMonthDD = (dateStr) => {
+  if (!dateStr || dateStr === '-') return '-';
+  const parts = String(dateStr).split(/[-/]/);
+  if (parts.length >= 3) {
+    const mIdx = parseInt(parts[1], 10) - 1;
+    const dNum = parseInt(parts[2], 10);
+    if (!isNaN(mIdx) && mIdx >= 0 && mIdx < 12 && !isNaN(dNum)) {
+      return `${MONTH_NAMES[mIdx]} - ${String(dNum).padStart(2, '0')}`;
+    }
+  }
+  return dateStr;
+};
+
 const getLatestUpdateDetails = (rec) => {
   if (!rec) return { dateStr: null, dateFormatted: '', text: '', diffDays: null };
 
@@ -1416,55 +1429,20 @@ export function LarkTable({
 
                               if (colKey === 'dueDate') {
                                 return (
-                                  <td key="dueDate" className="py-1.5 px-2 border-r border-slate-100 dark:border-slate-800/80 text-slate-500 font-mono text-[11px] whitespace-nowrap" style={{ width: `${columnWidths.dueDate || 140}px`, maxWidth: `${columnWidths.dueDate || 140}px`, overflow: 'hidden' }}>
-                                    <div className="flex flex-col gap-0.5">
-                                      <div className="flex items-center gap-1">
-                                        <input
-                                          type="date"
-                                          value={rec.dueDate || ''}
-                                          onChange={(e) => onUpdateRecord(rec.id, { dueDate: e.target.value })}
-                                          className="bg-transparent border-0 cursor-pointer focus:ring-0 text-[11px] font-mono text-slate-600 dark:text-slate-300 w-24 p-0"
-                                        />
-                                        <span className="text-[10px] text-blue-600 dark:text-sky-400 font-semibold cursor-pointer" title="Due Time (Default 9 AM)">
-                                          {rec.dueTime || DEFAULT_DUE_TIME}
+                                  <td key="dueDate" className="py-1.5 px-2 border-r border-slate-100 dark:border-slate-800/80 font-mono text-[11px] whitespace-nowrap" style={{ width: `${columnWidths.dueDate || 140}px`, maxWidth: `${columnWidths.dueDate || 140}px`, overflow: 'hidden' }}>
+                                    <div className="relative inline-flex items-center group">
+                                      <input
+                                        type="date"
+                                        value={rec.dueDate || ''}
+                                        onChange={(e) => onUpdateRecord(rec.id, { dueDate: e.target.value })}
+                                        className="absolute inset-0 opacity-0 w-full h-full cursor-pointer z-10"
+                                        title="Klik untuk ubah Due Date"
+                                      />
+                                      <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md text-[11px] font-mono text-slate-700 dark:text-neutral-200 group-hover:bg-slate-100 dark:group-hover:bg-neutral-800 transition cursor-pointer">
+                                        <Calendar className="w-3.5 h-3.5 text-slate-400 group-hover:text-blue-500 shrink-0" />
+                                        <span className="font-semibold tracking-tight">
+                                          {formatMonthDD(rec.dueDate)}
                                         </span>
-                                      </div>
-                                      <div className="flex items-center gap-1">
-                                        {rec.reminder === 'NONE' ? (
-                                          <span
-                                            onClick={(e) => {
-                                              e.stopPropagation();
-                                              onOpenRecord ? onOpenRecord(rec) : (onSelectRecord && onSelectRecord(rec));
-                                            }}
-                                            className="inline-flex items-center gap-0.5 px-1.5 py-0.2 rounded text-[9px] font-semibold bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-400 dark:text-slate-500 border border-slate-200 dark:border-slate-700 cursor-pointer transition shadow-2xs"
-                                            title="Reminder: NO REMINDER (Tidak ada pengingat). Klik untuk ubah di Side Peek."
-                                          >
-                                            <BellOff className="w-2.5 h-2.5 text-slate-400 shrink-0" />
-                                            <span>Off</span>
-                                          </span>
-                                        ) : (
-                                          <span
-                                            onClick={(e) => {
-                                              e.stopPropagation();
-                                              onOpenRecord ? onOpenRecord(rec) : (onSelectRecord && onSelectRecord(rec));
-                                            }}
-                                            className="inline-flex items-center gap-0.5 px-1.5 py-0.2 rounded text-[9px] font-semibold bg-amber-500/10 hover:bg-amber-500/20 text-amber-700 dark:text-amber-400 border border-amber-500/20 cursor-pointer transition shadow-2xs"
-                                            title={`Reminder: ${rec.reminder === 'D_DAY' || !rec.reminder ? 'D DAY (Hari H)' : rec.reminder?.replace(/_/g, ' ')} @ ${rec.reminderTime || rec.dueTime || DEFAULT_DUE_TIME}. Klik untuk ubah di Side Peek.`}
-                                          >
-                                            <Bell className="w-2.5 h-2.5 text-amber-500 shrink-0" />
-                                            <span>
-                                              {rec.reminder === '1_DAY_BEFORE' ? '-1D' :
-                                               rec.reminder === '2_DAYS_BEFORE' ? '-2D' :
-                                               rec.reminder === '3_DAYS_BEFORE' ? '-3D' :
-                                               rec.reminder === '7_DAYS_BEFORE' ? '-7D' : 'H'}
-                                            </span>
-                                            {rec.reminderTime && rec.reminderTime !== rec.dueTime && (
-                                              <span className="font-mono text-[8px] opacity-80">
-                                                {rec.reminderTime}
-                                              </span>
-                                            )}
-                                          </span>
-                                        )}
                                       </div>
                                     </div>
                                   </td>
@@ -1898,58 +1876,23 @@ export function LarkTable({
 
                                     if (colKey === 'dueDate') {
                                       return (
-                                        <td key="dueDate" className="py-1.5 px-2 border-r border-slate-100 dark:border-slate-800/80 text-slate-500 font-mono text-[11px] whitespace-nowrap" style={{ width: `${columnWidths.dueDate || 140}px`, maxWidth: `${columnWidths.dueDate || 140}px`, overflow: 'hidden' }}>
-                                          <div className="flex flex-col gap-0.5">
-                                            <div className="flex items-center gap-1">
-                                              <input
-                                                type="date"
-                                                value={sub.dueDate || ''}
-                                                onChange={(e) => onUpdateRecord(sub.id, { dueDate: e.target.value })}
-                                                className="bg-transparent border-0 cursor-pointer focus:ring-0 text-[11px] font-mono text-slate-600 dark:text-slate-300 w-24 p-0"
-                                              />
-                                              <span className="text-[10px] text-indigo-600 dark:text-indigo-400 font-semibold cursor-pointer" title="Due Time (Default 9 AM)">
-                                                {sub.dueTime || DEFAULT_DUE_TIME}
-                                              </span>
-                                            </div>
-                                            <div className="flex items-center gap-1">
-                                              {sub.reminder === 'NONE' ? (
-                                                <span
-                                                  onClick={(e) => {
-                                                    e.stopPropagation();
-                                                    onOpenRecord ? onOpenRecord(sub) : (onSelectRecord && onSelectRecord(sub));
-                                                  }}
-                                                  className="inline-flex items-center gap-0.5 px-1.5 py-0.2 rounded text-[9px] font-semibold bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-400 dark:text-slate-500 border border-slate-200 dark:border-slate-700 cursor-pointer transition shadow-2xs"
-                                                  title="Reminder: NO REMINDER (Tidak ada pengingat). Klik untuk ubah di Side Peek."
-                                                >
-                                                  <BellOff className="w-2.5 h-2.5 text-slate-400 shrink-0" />
-                                                  <span>Off</span>
-                                                </span>
-                                              ) : (
-                                                <span
-                                                  onClick={(e) => {
-                                                    e.stopPropagation();
-                                                    onOpenRecord ? onOpenRecord(sub) : (onSelectRecord && onSelectRecord(sub));
-                                                  }}
-                                                  className="inline-flex items-center gap-0.5 px-1.5 py-0.2 rounded text-[9px] font-semibold bg-amber-500/10 hover:bg-amber-500/20 text-amber-700 dark:text-amber-400 border border-amber-500/20 cursor-pointer transition shadow-2xs"
-                                                  title={`Reminder: ${sub.reminder === 'D_DAY' || !sub.reminder ? 'D DAY (Hari H)' : sub.reminder?.replace(/_/g, ' ')} @ ${sub.reminderTime || sub.dueTime || DEFAULT_DUE_TIME}. Klik untuk ubah di Side Peek.`}
-                                                >
-                                                  <Bell className="w-2.5 h-2.5 text-amber-500 shrink-0" />
-                                                  <span>
-                                                    {sub.reminder === '1_DAY_BEFORE' ? '-1D' :
-                                                     sub.reminder === '2_DAYS_BEFORE' ? '-2D' :
-                                                     sub.reminder === '3_DAYS_BEFORE' ? '-3D' :
-                                                     sub.reminder === '7_DAYS_BEFORE' ? '-7D' : 'H'}
-                                                  </span>
-                                                  {sub.reminderTime && sub.reminderTime !== sub.dueTime && (
-                                                    <span className="font-mono text-[8px] opacity-80">
-                                                      {sub.reminderTime}
-                                                    </span>
-                                                  )}
-                                                </span>
-                                              )}
-                                            </div>
-                                          </div>
-                                        </td>
+                                        <td key="dueDate" className="py-1.5 px-2 border-r border-slate-100 dark:border-slate-800/80 font-mono text-[11px] whitespace-nowrap" style={{ width: `${columnWidths.dueDate || 140}px`, maxWidth: `${columnWidths.dueDate || 140}px`, overflow: 'hidden' }}>
+                                           <div className="relative inline-flex items-center group">
+                                             <input
+                                               type="date"
+                                               value={sub.dueDate || ''}
+                                               onChange={(e) => onUpdateRecord(sub.id, { dueDate: e.target.value })}
+                                               className="absolute inset-0 opacity-0 w-full h-full cursor-pointer z-10"
+                                               title="Klik untuk ubah Due Date"
+                                             />
+                                             <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md text-[11px] font-mono text-slate-700 dark:text-neutral-200 group-hover:bg-slate-100 dark:group-hover:bg-neutral-800 transition cursor-pointer">
+                                               <Calendar className="w-3.5 h-3.5 text-slate-400 group-hover:text-blue-500 shrink-0" />
+                                               <span className="font-semibold tracking-tight">
+                                                 {formatMonthDD(sub.dueDate)}
+                                               </span>
+                                             </div>
+                                           </div>
+                                         </td>
                                       );
                                     }
 
