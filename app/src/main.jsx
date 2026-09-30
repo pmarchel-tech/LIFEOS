@@ -45,8 +45,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
 // Register Service Worker for mobile PWA & push notifications
 if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js').then(
+  const registerSW = () => {
+    navigator.serviceWorker.register('/sw.js', { scope: '/' }).then(
       (reg) => {
         console.log('Life OS Service Worker registered with scope:', reg.scope);
       },
@@ -54,6 +54,12 @@ if ('serviceWorker' in navigator) {
         console.warn('Life OS Service Worker registration failed:', err);
       }
     );
-  });
+  };
+
+  if (document.readyState === 'complete') {
+    registerSW();
+  } else {
+    window.addEventListener('load', registerSW);
+  }
 }
 

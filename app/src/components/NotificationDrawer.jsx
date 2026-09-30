@@ -168,6 +168,8 @@ export function NotificationDrawer({
   const [sortOption, setSortOption] = useState('date_desc');
   const [notifPermission, setNotifPermission] = useState(() => getNotificationPermission());
 
+  const [testFeedback, setTestFeedback] = useState(null);
+
   useEffect(() => {
     if (isOpen) {
       setNotifPermission(getNotificationPermission());
@@ -175,17 +177,38 @@ export function NotificationDrawer({
   }, [isOpen]);
 
   const handleEnableNotification = async () => {
-    const res = await requestNotificationPermission();
-    setNotifPermission(res);
-    if (res === 'granted') {
-      await sendTestNotification();
-    } else if (res === 'denied') {
-      alert('Izin notifikasi diblokir di browser. Klik ikon pengaturan situs/gembok di sebelah URL browser dan pilih "Izinkan / Allow" untuk Notifikasi.');
+    try {
+      const res = await requestNotificationPermission();
+      setNotifPermission(res);
+      if (res === 'granted') {
+        await sendTestNotification();
+        setTestFeedback('✅ Izin aktif! Tes getar & notifikasi terkirim.');
+        setTimeout(() => setTestFeedback(null), 4000);
+      } else if (res === 'denied') {
+        alert('Izin notifikasi diblokir di HP/browser. Di Chrome HP: Klik ikon gembok/setelan di sebelah URL > Izin > Notifikasi > Izinkan.');
+      }
+    } catch (err) {
+      alert('Error mengaktifkan notifikasi: ' + err.message);
     }
   };
 
   const handleTestNotification = async () => {
-    await sendTestNotification();
+    try {
+      const currentPerm = getNotificationPermission();
+      if (currentPerm !== 'granted') {
+        const res = await requestNotificationPermission();
+        setNotifPermission(res);
+        if (res !== 'granted') {
+          alert('Izin notifikasi belum diizinkan di HP. Silakan aktifkan izin notifikasi terlebih dahulu.');
+          return;
+        }
+      }
+      await sendTestNotification();
+      setTestFeedback('🔔 Tes getar & notifikasi terkirim! Cek status bar HP Anda.');
+      setTimeout(() => setTestFeedback(null), 4000);
+    } catch (err) {
+      alert('Gagal tes notifikasi: ' + err.message);
+    }
   };
 
   // Compute Active Notifications from Records using unified function
@@ -237,35 +260,42 @@ export function NotificationDrawer({
       </div>
 
       {/* Device Notification Status & Test Bar */}
-      <div className="px-3.5 py-2 bg-amber-500/10 dark:bg-amber-500/15 border-b border-amber-500/20 flex items-center justify-between text-[11px]">
-        {notifPermission === 'granted' ? (
-          <>
-            <span className="flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400 font-semibold">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              Notifikasi HP & Browser Aktif
-            </span>
-            <button
-              type="button"
-              onClick={handleTestNotification}
-              className="px-2 py-0.5 rounded-md bg-white dark:bg-neutral-800 text-amber-700 dark:text-amber-300 font-semibold border border-amber-500/30 hover:bg-amber-100 dark:hover:bg-neutral-700 transition cursor-pointer shadow-2xs"
-            >
-              🔔 Tes Bunyi & Getar
-            </button>
-          </>
-        ) : (
-          <>
-            <span className="flex items-center gap-1.5 text-amber-700 dark:text-amber-300 font-medium">
-              <AlertCircle className="w-3.5 h-3.5 text-amber-500 shrink-0" />
-              Izin Notifikasi HP Belum Aktif
-            </span>
-            <button
-              type="button"
-              onClick={handleEnableNotification}
-              className="px-2 py-0.5 rounded-md bg-amber-500 hover:bg-amber-600 text-white font-bold transition cursor-pointer shadow-xs active:scale-95"
-            >
-              Aktifkan Sekarang
-            </button>
-          </>
+      <div className="px-3.5 py-2 bg-amber-500/10 dark:bg-amber-500/15 border-b border-amber-500/20 flex flex-col gap-1.5 text-[11px]">
+        <div className="flex items-center justify-between">
+          {notifPermission === 'granted' ? (
+            <>
+              <span className="flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400 font-semibold">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                Notifikasi HP & Browser Aktif
+              </span>
+              <button
+                type="button"
+                onClick={handleTestNotification}
+                className="px-2 py-0.5 rounded-md bg-white dark:bg-neutral-800 text-amber-700 dark:text-amber-300 font-semibold border border-amber-500/30 hover:bg-amber-100 dark:hover:bg-neutral-700 transition cursor-pointer shadow-2xs"
+              >
+                🔔 Tes Bunyi & Getar
+              </button>
+            </>
+          ) : (
+            <>
+              <span className="flex items-center gap-1.5 text-amber-700 dark:text-amber-300 font-medium">
+                <AlertCircle className="w-3.5 h-3.5 text-amber-500 shrink-0" />
+                Izin Notifikasi HP Belum Aktif
+              </span>
+              <button
+                type="button"
+                onClick={handleEnableNotification}
+                className="px-2 py-0.5 rounded-md bg-amber-500 hover:bg-amber-600 text-white font-bold transition cursor-pointer shadow-xs active:scale-95"
+              >
+                Aktifkan Sekarang
+              </button>
+            </>
+          )}
+        </div>
+        {testFeedback && (
+          <div className="px-2 py-1 bg-amber-500/20 text-amber-800 dark:text-amber-200 rounded font-semibold text-[10px] animate-in fade-in duration-200">
+            {testFeedback}
+          </div>
         )}
       </div>
 

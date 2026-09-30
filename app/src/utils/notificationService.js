@@ -70,6 +70,13 @@ export function playReminderChime() {
 export async function sendTaskNotification(task) {
   playReminderChime();
 
+  // Trigger hardware vibration on mobile phone immediately
+  try {
+    if (typeof navigator !== 'undefined' && 'vibrate' in navigator) {
+      navigator.vibrate([300, 150, 300, 150, 300]);
+    }
+  } catch (vibErr) {}
+
   if (!('Notification' in window)) {
     console.warn('Browser does not support notifications.');
     return null;
@@ -84,25 +91,42 @@ export async function sendTaskNotification(task) {
   const scheduledTime = task.reminderTime || task.dueTime || '09:00';
   const bodyText = `Jatuh tempo: ${task.dueDate || 'Hari ini'} pukul ${scheduledTime} | ${task.taskLeader || 'Pierre Marchel'} (${task.priority || 'P1'})`;
 
-  // Options optimized for Mobile Android/iOS PWA & Desktop
+  // Standard static icon path required by Android Notification Manager
   const options = {
     body: bodyText,
-    icon: 'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⏰</text></svg>',
-    badge: 'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⏰</text></svg>',
+    icon: '/icon-192.png',
+    badge: '/icon-192.png',
     tag: `task-reminder-${task.id || Date.now()}`,
     renotify: true,
     requireInteraction: true,
-    vibrate: [200, 100, 200, 100, 200],
+    vibrate: [300, 150, 300, 150, 300],
     data: { url: '/' }
   };
 
-  // 1. Try Service Worker first (REQUIRED for mobile Android Chrome & iOS Safari PWA)
+  // 1. Try Service Worker first (MANDATORY for Android Chrome & mobile PWA)
   if ('serviceWorker' in navigator) {
     try {
-      const reg = await navigator.serviceWorker.ready;
-      if (reg && reg.showNotification) {
-        await reg.showNotification(title, options);
-        return true;
+      let reg = await navigator.serviceWorker.getRegistration();
+      if (!reg) {
+        reg = await navigator.serviceWorker.register('/sw.js', { scope: '/' });
+      }
+
+      // Check if registration is active or wait briefly
+      if (reg) {
+        if (!reg.active) {
+          await new Promise((resolve) => {
+            const timer = setTimeout(resolve, 1500);
+            navigator.serviceWorker.ready.then(() => {
+              clearTimeout(timer);
+              resolve();
+            }).catch(resolve);
+          });
+        }
+
+        if (reg.showNotification) {
+          await reg.showNotification(title, options);
+          return { success: true, via: 'serviceWorker' };
+        }
       }
     } catch (swErr) {
       console.warn('Service Worker showNotification error, falling back to Notification constructor:', swErr);
@@ -116,10 +140,10 @@ export async function sendTaskNotification(task) {
       window.focus();
       notification.close();
     };
-    return notification;
+    return { success: true, via: 'desktopNotification' };
   } catch (err) {
     console.error('Failed to create browser notification:', err);
-    return null;
+    return { success: false, error: err.message };
   }
 }
 
