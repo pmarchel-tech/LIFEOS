@@ -748,15 +748,16 @@ export function LarkNavbar({
           <select
             value={kanbanDueDateFilter || 'ALL'}
             onChange={(e) => setKanbanDueDateFilter && setKanbanDueDateFilter(e.target.value)}
-            className={`px-3 py-1.5 rounded-xl border text-xs font-semibold cursor-pointer focus:outline-none focus:ring-2 focus:ring-apple-blue/30 transition max-w-[150px] sm:max-w-[180px] truncate shadow-xs ${
+            className={`px-3 py-1.5 rounded-xl border text-xs font-semibold cursor-pointer focus:outline-none focus:ring-2 focus:ring-apple-blue/30 transition max-w-[170px] sm:max-w-[210px] truncate shadow-xs ${
               kanbanDueDateFilter && kanbanDueDateFilter !== 'ALL'
                 ? 'bg-apple-blue/20 border-apple-blue/50 text-apple-blue dark:text-sky-300 font-bold ring-1 ring-apple-blue/30'
                 : 'bg-white dark:bg-[#252528] border-neutral-300 dark:border-white/10 text-neutral-800 dark:text-neutral-200 hover:border-neutral-400 dark:hover:border-white/20'
             }`}
-            title="Filter Jatuh Tempo (Overdue, Today, This Week, Future)"
+            title="Filter Jatuh Tempo (Overdue, Overdue s/d Minggu Ini, Today, This Week, Future)"
           >
             <option value="ALL" className="bg-white dark:bg-[#1c1c1e] text-neutral-900 dark:text-white">Due Date: All</option>
             <option value="OVERDUE" className="bg-white dark:bg-[#1c1c1e] text-rose-600 dark:text-rose-400 font-bold">⚠️ Overdue</option>
+            <option value="OVERDUE_THIS_WEEK" className="bg-white dark:bg-[#1c1c1e] text-rose-600 dark:text-rose-400 font-bold">🚨 Overdue s/d Minggu Ini</option>
             <option value="TODAY" className="bg-white dark:bg-[#1c1c1e] text-amber-600 dark:text-amber-400 font-bold">🔔 Due Today</option>
             <option value="THIS_WEEK" className="bg-white dark:bg-[#1c1c1e] text-blue-600 dark:text-blue-400 font-semibold">📅 Due This Week</option>
             <option value="NEXT_WEEK" className="bg-white dark:bg-[#1c1c1e] text-indigo-600 dark:text-indigo-400 font-semibold">📆 Due Next Week</option>

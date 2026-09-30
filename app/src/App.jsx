@@ -67,6 +67,14 @@ const matchesDueDateFilter = (dateStr, filterValue) => {
   if (filterValue === 'OVERDUE') {
     return targetDate < today;
   }
+  if (filterValue === 'OVERDUE_THIS_WEEK' || filterValue === 'OVERDUE_AND_THIS_WEEK') {
+    // Week bounds: Monday of current week to Sunday of current week
+    const dayOfWeek = today.getDay(); // 0 = Sunday, 1 = Monday, ...
+    const diffToMonday = dayOfWeek === 0 ? -6 : 1 - dayOfWeek;
+    const startOfWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() + diffToMonday);
+    const endOfWeek = new Date(startOfWeek.getFullYear(), startOfWeek.getMonth(), startOfWeek.getDate() + 6);
+    return targetDate <= endOfWeek;
+  }
   if (filterValue === 'TODAY') {
     return targetDate.getTime() === today.getTime();
   }
