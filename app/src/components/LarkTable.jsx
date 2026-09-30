@@ -1429,17 +1429,44 @@ export function LarkTable({
 
                               if (colKey === 'dueDate') {
                                 return (
-                                  <td key="dueDate" className="py-1.5 px-2 border-r border-slate-100 dark:border-slate-800/80 font-mono text-[11px] whitespace-nowrap" style={{ width: `${columnWidths.dueDate || 140}px`, maxWidth: `${columnWidths.dueDate || 140}px`, overflow: 'hidden' }}>
-                                    <div className="relative inline-flex items-center group">
+                                  <td
+                                    key="dueDate"
+                                    className="py-1.5 px-2 border-r border-slate-100 dark:border-slate-800/80 font-mono text-[11px] whitespace-nowrap"
+                                    style={{ width: `${columnWidths.dueDate || 140}px`, maxWidth: `${columnWidths.dueDate || 140}px`, overflow: 'hidden' }}
+                                    onClick={(e) => e.stopPropagation()}
+                                  >
+                                    <div
+                                      className="relative inline-flex items-center group cursor-pointer"
+                                      onClick={(e) => {
+                                        e.stopPropagation();
+                                        const input = e.currentTarget.querySelector('input[type="date"]');
+                                        if (input) {
+                                          try {
+                                            input.showPicker();
+                                          } catch (_) {
+                                            input.focus();
+                                          }
+                                        }
+                                      }}
+                                    >
                                       <input
                                         type="date"
                                         value={rec.dueDate || ''}
-                                        onChange={(e) => onUpdateRecord(rec.id, { dueDate: e.target.value })}
-                                        className="absolute inset-0 opacity-0 w-full h-full cursor-pointer z-10"
+                                        onChange={(e) => {
+                                          e.stopPropagation();
+                                          onUpdateRecord(rec.id, { dueDate: e.target.value });
+                                        }}
+                                        onClick={(e) => {
+                                          e.stopPropagation();
+                                          try {
+                                            e.target.showPicker();
+                                          } catch (_) {}
+                                        }}
+                                        className="date-picker-overlay z-20"
                                         title="Klik untuk ubah Due Date"
                                       />
-                                      <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md text-[11px] font-mono text-slate-700 dark:text-neutral-200 group-hover:bg-slate-100 dark:group-hover:bg-neutral-800 transition cursor-pointer">
-                                        <Calendar className="w-3.5 h-3.5 text-slate-400 group-hover:text-blue-500 shrink-0" />
+                                      <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md text-[11px] font-mono text-slate-700 dark:text-neutral-200 group-hover:bg-blue-50 dark:group-hover:bg-blue-950/40 group-hover:text-blue-600 dark:group-hover:text-blue-400 border border-transparent group-hover:border-blue-200 dark:group-hover:border-blue-800/60 transition pointer-events-none">
+                                        <Calendar className="w-3.5 h-3.5 text-blue-500 shrink-0" />
                                         <span className="font-semibold tracking-tight">
                                           {formatMonthDD(rec.dueDate)}
                                         </span>
@@ -1876,23 +1903,50 @@ export function LarkTable({
 
                                     if (colKey === 'dueDate') {
                                       return (
-                                        <td key="dueDate" className="py-1.5 px-2 border-r border-slate-100 dark:border-slate-800/80 font-mono text-[11px] whitespace-nowrap" style={{ width: `${columnWidths.dueDate || 140}px`, maxWidth: `${columnWidths.dueDate || 140}px`, overflow: 'hidden' }}>
-                                           <div className="relative inline-flex items-center group">
-                                             <input
-                                               type="date"
-                                               value={sub.dueDate || ''}
-                                               onChange={(e) => onUpdateRecord(sub.id, { dueDate: e.target.value })}
-                                               className="absolute inset-0 opacity-0 w-full h-full cursor-pointer z-10"
-                                               title="Klik untuk ubah Due Date"
-                                             />
-                                             <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md text-[11px] font-mono text-slate-700 dark:text-neutral-200 group-hover:bg-slate-100 dark:group-hover:bg-neutral-800 transition cursor-pointer">
-                                               <Calendar className="w-3.5 h-3.5 text-slate-400 group-hover:text-blue-500 shrink-0" />
-                                               <span className="font-semibold tracking-tight">
-                                                 {formatMonthDD(sub.dueDate)}
-                                               </span>
-                                             </div>
-                                           </div>
-                                         </td>
+                                        <td
+                                          key="dueDate"
+                                          className="py-1.5 px-2 border-r border-slate-100 dark:border-slate-800/80 font-mono text-[11px] whitespace-nowrap"
+                                          style={{ width: `${columnWidths.dueDate || 140}px`, maxWidth: `${columnWidths.dueDate || 140}px`, overflow: 'hidden' }}
+                                          onClick={(e) => e.stopPropagation()}
+                                        >
+                                          <div
+                                            className="relative inline-flex items-center group cursor-pointer"
+                                            onClick={(e) => {
+                                              e.stopPropagation();
+                                              const input = e.currentTarget.querySelector('input[type="date"]');
+                                              if (input) {
+                                                try {
+                                                  input.showPicker();
+                                                } catch (_) {
+                                                  input.focus();
+                                                }
+                                              }
+                                            }}
+                                          >
+                                            <input
+                                              type="date"
+                                              value={sub.dueDate || ''}
+                                              onChange={(e) => {
+                                                e.stopPropagation();
+                                                onUpdateRecord(sub.id, { dueDate: e.target.value });
+                                              }}
+                                              onClick={(e) => {
+                                                e.stopPropagation();
+                                                try {
+                                                  e.target.showPicker();
+                                                } catch (_) {}
+                                              }}
+                                              className="date-picker-overlay z-20"
+                                              title="Klik untuk ubah Due Date"
+                                            />
+                                            <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md text-[11px] font-mono text-slate-700 dark:text-neutral-200 group-hover:bg-blue-50 dark:group-hover:bg-blue-950/40 group-hover:text-blue-600 dark:group-hover:text-blue-400 border border-transparent group-hover:border-blue-200 dark:group-hover:border-blue-800/60 transition pointer-events-none">
+                                              <Calendar className="w-3.5 h-3.5 text-blue-500 shrink-0" />
+                                              <span className="font-semibold tracking-tight">
+                                                {formatMonthDD(sub.dueDate)}
+                                              </span>
+                                            </div>
+                                          </div>
+                                        </td>
                                       );
                                     }
 
