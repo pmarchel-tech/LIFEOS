@@ -58,6 +58,9 @@ const getLatestUpdateDetails = (rec) => {
     const latest = sorted[0];
     dateStr = latest.date || (latest.createdAt ? latest.createdAt.split('T')[0] : null);
     text = latest.text || '';
+  } else if (rec.lastUpdate) {
+    dateStr = rec.lastUpdate.split('T')[0];
+    text = rec.notes ? rec.notes.trim() : '';
   } else if (rec.notes && rec.notes.trim()) {
     dateStr = rec.updated_at ? rec.updated_at.split('T')[0] : (rec.dueDate || rec.startTime || null);
     text = rec.notes.trim();
