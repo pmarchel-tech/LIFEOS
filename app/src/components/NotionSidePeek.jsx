@@ -234,12 +234,21 @@ export function NotionSidePeek({
     window.open(gCalUrl, '_blank', 'noopener,noreferrer');
   };
 
-  // Keyboard shortcut: Alt + S (or Ctrl/Cmd + Enter) to save update
+  // Keyboard shortcuts: Alt + T (close side peek), Alt + S / Ctrl+Enter (save update)
   useEffect(() => {
     if (!isOpen || !record) return;
 
     const handleKeyDown = (e) => {
-      // Check for Alt + S (or Alt + s) or Ctrl+Enter / Cmd+Enter
+      // 1. Shortcut Alt + T -> Close side peek
+      const isAltT = e.altKey && !e.ctrlKey && !e.metaKey && (e.key === 't' || e.key === 'T' || e.code === 'KeyT');
+      if (isAltT) {
+        e.preventDefault();
+        e.stopPropagation();
+        onClose();
+        return;
+      }
+
+      // 2. Check for Alt + S (or Alt + s) or Ctrl+Enter / Cmd+Enter
       const isAltS = e.altKey && (e.key === 's' || e.key === 'S');
       const isCtrlEnter = (e.ctrlKey || e.metaKey) && e.key === 'Enter';
 
@@ -263,7 +272,7 @@ export function NotionSidePeek({
 
     window.addEventListener('keydown', handleKeyDown, true);
     return () => window.removeEventListener('keydown', handleKeyDown, true);
-  }, [isOpen, record?.id, updateText, updateDate, editingUpdateId, editingUpdateText, editingUpdateDate, updatesList]);
+  }, [isOpen, record?.id, onClose, updateText, updateDate, editingUpdateId, editingUpdateText, editingUpdateDate, updatesList]);
 
   if (!isOpen || !record) return null;
 
@@ -390,14 +399,18 @@ export function NotionSidePeek({
           </button>
         </div>
 
-        {/* Right top icons (Only Close button) */}
+        {/* Right top icons (Close button) */}
         <div className="flex items-center gap-1.5">
           <button
             onClick={onClose}
-            className="p-1.5 hover:bg-slate-200/60 dark:hover:bg-neutral-800 rounded transition text-slate-500 dark:text-neutral-400 hover:text-slate-800 dark:hover:text-white cursor-pointer"
-            title="Tutup (Esc)"
+            className="flex items-center gap-1.5 px-2 py-1 hover:bg-slate-200/60 dark:hover:bg-neutral-800 rounded-lg transition text-slate-500 dark:text-neutral-400 hover:text-slate-800 dark:hover:text-white cursor-pointer group"
+            title="Tutup (Shortcut: Alt + T atau Esc)"
           >
-            <X className="w-4 h-4" />
+            <span className="text-[11px] font-medium hidden sm:inline text-slate-400 group-hover:text-slate-600 dark:group-hover:text-neutral-300">Tutup</span>
+            <kbd className="hidden sm:inline-block px-1 py-0.2 text-[9px] font-mono rounded bg-black/5 dark:bg-white/10 text-neutral-500 dark:text-neutral-400 border border-black/5 dark:border-white/5">
+              Alt+T
+            </kbd>
+            <X className="w-4 h-4 ml-0.5" />
           </button>
         </div>
       </div>

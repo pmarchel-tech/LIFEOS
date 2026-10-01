@@ -93,9 +93,9 @@ export function LarkNavbar({
   // Shortcuts: Alt + C to focus search box, Alt + R to reset filters
   useEffect(() => {
     const handleKeyDown = (e) => {
-      // 1. Shortcut Alt + C -> Focus search
-      const isAltC = e.altKey && !e.ctrlKey && !e.metaKey && (e.key === 'c' || e.key === 'C' || e.code === 'KeyC');
-      if (isAltC) {
+      // 1. Shortcut Alt + F -> Focus search
+      const isAltF = e.altKey && !e.ctrlKey && !e.metaKey && (e.key === 'f' || e.key === 'F' || e.code === 'KeyF');
+      if (isAltF) {
         e.preventDefault();
 
         // If not in task list, optionally switch to table view
@@ -648,13 +648,13 @@ export function LarkNavbar({
                   }
                 }
               }}
-              title="Cari task / project / leader (Shortcut: Alt + C)"
+              title="Cari task / project / leader (Shortcut: Alt + F)"
               className="pl-9 pr-14 py-1.5 bg-neutral-200/60 dark:bg-white/10 hover:bg-neutral-200 dark:hover:bg-white/15 border border-black/5 dark:border-white/10 rounded-xl text-xs text-neutral-900 dark:text-white placeholder-neutral-500 focus:outline-none focus:bg-white dark:focus:bg-[#252528] focus:border-apple-blue focus:ring-2 focus:ring-apple-blue/30 w-36 sm:w-56 transition-all shadow-inner"
             />
             {!searchQuery && (
               <div className="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none hidden sm:flex items-center">
                 <kbd className="text-[10px] text-neutral-500 dark:text-neutral-400 bg-black/5 dark:bg-white/10 px-1.5 py-0.5 rounded font-mono font-medium border border-black/10 dark:border-white/10 shadow-xs">
-                  Alt+C
+                  Alt+F
                 </kbd>
               </div>
             )}
