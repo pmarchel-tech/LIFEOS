@@ -90,9 +90,10 @@ export function LarkNavbar({
 
   const searchInputRef = useRef(null);
 
-  // Shortcut Alt + C to immediately focus search box (from Task List or any view)
+  // Shortcuts: Alt + C to focus search box, Alt + R to reset filters
   useEffect(() => {
     const handleKeyDown = (e) => {
+      // 1. Shortcut Alt + C -> Focus search
       const isAltC = e.altKey && !e.ctrlKey && !e.metaKey && (e.key === 'c' || e.key === 'C' || e.code === 'KeyC');
       if (isAltC) {
         e.preventDefault();
@@ -109,12 +110,23 @@ export function LarkNavbar({
             searchInputRef.current.select();
           }
         }, 20);
+        return;
+      }
+
+      // 2. Shortcut Alt + R -> Reset filters
+      const isAltR = e.altKey && !e.ctrlKey && !e.metaKey && (e.key === 'r' || e.key === 'R' || e.code === 'KeyR');
+      if (isAltR) {
+        e.preventDefault();
+        if (typeof onResetKanbanFilters === 'function') {
+          onResetKanbanFilters();
+        }
+        return;
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [activeView, setActiveView]);
+  }, [activeView, setActiveView, onResetKanbanFilters]);
 
   const handleRequestNotif = async () => {
     const res = await requestNotificationPermission();
@@ -773,10 +785,13 @@ export function LarkNavbar({
                 ? 'bg-rose-500/15 text-rose-600 dark:text-rose-300 hover:bg-rose-500/25 border-rose-500/30 font-bold'
                 : 'bg-white/60 dark:bg-[#252528]/60 text-neutral-400 dark:text-neutral-500 border-neutral-200 dark:border-white/5 cursor-not-allowed opacity-60'
             }`}
-            title={activeKanbanFiltersCount > 0 ? "Reset semua filter & pencarian" : "Tidak ada filter atau pencarian yang aktif"}
+            title="Reset semua filter & pencarian (Shortcut: Alt + R)"
           >
             <RotateCcw className={`w-3 h-3 ${activeKanbanFiltersCount > 0 ? 'text-rose-500 dark:text-rose-400' : 'text-neutral-400 dark:text-neutral-500'}`} />
             <span>Reset Filter{activeKanbanFiltersCount > 0 ? ` (${activeKanbanFiltersCount})` : ''}</span>
+            <kbd className="hidden sm:inline-block px-1 py-0.2 text-[9px] font-mono rounded bg-black/5 dark:bg-white/10 text-neutral-500 dark:text-neutral-400 border border-black/5 dark:border-white/5">
+              Alt+R
+            </kbd>
           </button>
         </div>
       )}
